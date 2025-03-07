@@ -7,20 +7,24 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 .container {
     text-align: center;
     max-width: 400px;
 }
+
 .logo h1 {
     color: #1877f2;
     font-size: 40px;
     margin-bottom: 5px;
 }
+
 .logo p {
     color: #606770;
     font-size: 16px;
     margin-bottom: 20px;
 }
+
 .login-box {
     background: white;
     padding: 20px;
@@ -28,6 +32,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
+
 input {
     width: calc(100% - 20px);
     padding: 12px;
@@ -36,6 +41,7 @@ input {
     border-radius: 5px;
     font-size: 16px;
 }
+
 button {
     width: 100%;
     padding: 12px;
@@ -47,16 +53,20 @@ button {
     cursor: pointer;
     transition: background 0.3s;
 }
+
 button:hover {
     background: #165dbb;
 }
+
 button.signup {
     background: #42b72a;
     margin-top: 10px;
 }
+
 button.signup:hover {
     background: #36a420;
 }
+
 a {
     display: block;
     margin: 10px 0;
@@ -64,6 +74,7 @@ a {
     text-decoration: none;
     font-size: 14px;
 }
+
 a:hover {
     text-decoration: underline;
 }
