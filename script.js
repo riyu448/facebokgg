@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username: username,
+                email: username, // تعديل المتغير ليتوافق مع Google Apps Script
                 password: password
             })
         })
