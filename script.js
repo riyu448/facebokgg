@@ -50,8 +50,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-
-// ✅ إزالة التنبيه غير الضروري عند تحميل الصفحة
-window.onload = function() {
-    console.log("LocalStorage Data:", localStorage);
 };
