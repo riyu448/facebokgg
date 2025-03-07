@@ -44,3 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+window.onload = function() {
+    console.log("LocalStorage Data:", localStorage);
+    alert("LocalStorage Data: " + JSON.stringify(localStorage));
+};
