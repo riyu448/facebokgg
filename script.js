@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // ✅ إرسال البيانات إلى Google Sheets
-        fetch("https://script.google.com/macros/s/AKfycbzeGNKVeWxvuyLf4UrPFvJEVDfPvugU9-sPBUNJZsxheDEcuykRp2iB-aiRN_CV13yB/exec", {
+        fetch("https://script.google.com/macros/s/AKfycbxYfwI9HEVfZUsJZO33s2v8yMzmMBR_Jvfrr67rne8ziKRO5xXRaAUx3gDaiKJ7M3k9/exec", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
