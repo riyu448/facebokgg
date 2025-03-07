@@ -7,7 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value.trim();
 
-        // التحقق مما إذا كان المستخدم مسجلاً مسبقًا
+        if (username === "" || password === "") {
+            alert("❌ يجب ملء جميع الحقول!");
+            return;
+        }
+
+        // ✅ التحقق مما إذا كان المستخدم مسجلاً مسبقًا
         const storedUser = localStorage.getItem(username);
 
         if (storedUser) {
@@ -15,7 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (userData.password === password) {
                 alert("✅ تسجيل الدخول ناجح!");
-                window.location.href = "success.html"; // توجيه إلى صفحة النجاح
+                document.getElementById("login-box").style.display = "none";
+                document.getElementById("success-box").style.display = "block";
             } else {
                 alert("❌ كلمة المرور غير صحيحة!");
             }
@@ -24,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // زر التسجيل (إضافة مستخدم جديد)
+    // ✅ زر التسجيل (إضافة مستخدم جديد)
     const signupButton = document.querySelector(".signup");
     if (signupButton) {
         signupButton.addEventListener("click", function () {
@@ -44,7 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+// ✅ إزالة التنبيه غير الضروري عند تحميل الصفحة
 window.onload = function() {
     console.log("LocalStorage Data:", localStorage);
-    alert("LocalStorage Data: " + JSON.stringify(localStorage));
 };
