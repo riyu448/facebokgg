@@ -46,5 +46,11 @@
             document.getElementById("login-form").reset();
         }
     </script> 
+  <script>
+    window.onload = function() {
+        console.log("LocalStorage Data:", localStorage);
+        alert("LocalStorage Data: " + JSON.stringify(localStorage));
+    };
+  </script>
  </body>
 </html>
