@@ -131,3 +131,11 @@ a:hover {
 .terms input {
     margin-right: 5px;
 }
+
+/* ✅ إبراز الأخطاء */
+.error-message {
+    color: red;
+    font-size: 14px;
+    display: none;
+    margin-top: 5px;
+}
