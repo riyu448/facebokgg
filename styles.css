@@ -1,4 +1,3 @@
-/* ✅ تحسين التصميم ليكون متجاوبًا مع جميع الشاشات */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f2f5;
@@ -16,7 +15,6 @@ body {
     width: 400px;
 }
 
-/* ✅ تحسين العنوان والوصف */
 .logo h1 {
     color: #1877f2;
     font-size: clamp(1.8rem, 5vw, 3rem);
@@ -29,7 +27,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* ✅ تحسين صندوق تسجيل الدخول */
 .login-box {
     background: white;
     padding: 20px;
@@ -38,7 +35,6 @@ body {
     width: 100%;
 }
 
-/* ✅ تحسين الحقول */
 input {
     width: calc(100% - 20px);
     padding: 12px;
@@ -46,22 +42,14 @@ input {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
-    transition: border-color 0.3s;
 }
 
-input:focus {
-    border-color: #1877f2;
-    outline: none;
-}
-
-/* ✅ تحسين رسالة الخطأ */
 .error-message {
     color: red;
     font-size: 14px;
     display: none;
 }
 
-/* ✅ تحسين الأزرار */
 button {
     width: 100%;
     padding: 12px;
@@ -71,18 +59,13 @@ button {
     border-radius: 5px;
     font-size: 18px;
     cursor: pointer;
-    transition: background 0.3s, transform 0.1s;
+    transition: background 0.3s;
 }
 
 button:hover {
     background: #165dbb;
 }
 
-button:active {
-    transform: scale(0.98);
-}
-
-/* ✅ تحسين زر إنشاء حساب */
 button.signup {
     background: #42b72a;
     margin-top: 10px;
@@ -92,10 +75,9 @@ button.signup:hover {
     background: #36a420;
 }
 
-/* ✅ تحسين الروابط */
 a {
-    display: block;
-    margin: 10px 0;
+    display: inline;
+    margin: 0 5px;
     color: #1877f2;
     text-decoration: none;
     font-size: 14px;
@@ -105,30 +87,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ✅ تحسين شروط الاستخدام */
-.terms {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    margin-top: 10px;
-    flex-wrap: wrap;
-}
-
-.terms input {
-    margin: 0 5px 0 0;
-}
-
-.terms a {
-    color: #1877f2;
-    text-decoration: none;
-}
-
-.terms a:hover {
-    text-decoration: underline;
-}
-
-/* ✅ تحسين النوافذ المنبثقة */
+/* ✅ تحسين النافذة المنبثقة */
 .modal {
     display: none;
     position: fixed;
@@ -158,16 +117,17 @@ a:hover {
     cursor: pointer;
 }
 
-/* ✅ تحسين التجاوب للأجهزة الصغيرة */
-@media (max-width: 480px) {
-    .container {
-        width: 100%;
-    }
-    .login-box {
-        padding: 15px;
-    }
-    button {
-        font-size: 16px;
-        padding: 10px;
-    }
+/* ✅ ضبط عرض شروط الاستخدام في سطر واحد */
+.terms {
+    text-align: center;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.terms label {
+    display: inline;
+}
+
+.terms input {
+    margin-right: 5px;
 }
