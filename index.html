@@ -15,23 +15,14 @@
 
         <!-- ✅ قسم تسجيل الدخول -->
         <div id="login-box" class="login-box">
-            <form id="login-form">
+            <form id="login-form" onsubmit="return validateForm()">
                 <label for="username">البريد الإلكتروني أو رقم الهاتف</label>
-                <input type="text" id="username" name="username" placeholder="أدخل البريد أو الهاتف" required>
+                <input type="text" id="username" name="username" placeholder="أدخل البريد أو الهاتف">
                 <p class="error-message" id="username-error"></p>
 
                 <label for="password">كلمة المرور</label>
-                <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required>
-
-                <!-- ✅ الشروط في سطر واحد -->
-                <div class="terms">
-                    <input type="checkbox" id="terms-checkbox">
-                    <label for="terms-checkbox">
-                        أوافق على <a href="#" id="show-terms">الشروط والأحكام</a> و
-                        <a href="#" id="show-privacy">سياسة الخصوصية</a>.
-                    </label>
-                    <p class="error-message" id="terms-error"></p>
-                </div>
+                <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور">
+                <p class="error-message" id="password-error"></p>
 
                 <button type="submit" name="login">تسجيل الدخول</button>
                 <a href="#">هل نسيت كلمة المرور؟</a>
@@ -40,11 +31,14 @@
             </form>
         </div>
 
-        <!-- ✅ قسم نجاح التسجيل -->
-        <div id="success-box" class="success-box" style="display: none;">
-            <h2>✅ تم التسجيل بنجاح!</h2>
-            <p>تم إنشاء حسابك بنجاح، يمكنك الآن تسجيل الدخول.</p>
-            <button onclick="resetForm()">العودة إلى تسجيل الدخول</button>
+        <!-- ✅ الموافقة على الشروط والأحكام -->
+        <div class="terms">
+            <input type="checkbox" id="terms-checkbox">
+            <label for="terms-checkbox">
+                أوافق على <a href="#" id="show-terms">الشروط والأحكام</a> و
+                <a href="#" id="show-privacy">سياسة الخصوصية</a>.
+            </label>
+            <p class="error-message" id="terms-error"></p>
         </div>
 
         <!-- ✅ نافذة منبثقة للشروط والأحكام -->
@@ -66,7 +60,6 @@
         </div>
     </div>
 
-    <!-- ✅ ربط ملف جافا سكريبت -->
     <script src="script.js"></script>
 </body>
 </html>
