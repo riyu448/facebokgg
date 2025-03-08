@@ -70,8 +70,7 @@ function loginUser() {
     if (foundUser) {    
         // ✅ إذا كان الحساب موجودًا، تحقق من كلمة المرور      
         if (foundUser.password === password) {    
-            localStorage.setItem("currentUser", username);    
-            window.location.href = "success.html";    
+            localStorage.setItem("currentUser", username);       
             return;    
         } else {    
             passwordError.innerText = "كلمة المرور غير صحيحة.";    
