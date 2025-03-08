@@ -25,8 +25,8 @@ function validateForm() {
     let isValid = true;
 
     // ✅ التحقق من صحة البريد الإلكتروني أو رقم الهاتف
-    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // التحقق من البريد الإلكتروني
-    let phoneRegex = /^\d{10,15}$/; // التحقق من رقم الهاتف (10-15 رقم)
+    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let phoneRegex = /^(\+?\d{1,3})?\d{10,15}$/;
 
     if (username.value.trim() === "") {
         username.style.border = "2px solid red";
@@ -35,7 +35,7 @@ function validateForm() {
         isValid = false;
     } else if (!emailRegex.test(username.value) && !phoneRegex.test(username.value)) {
         username.style.border = "2px solid red";
-        usernameError.innerText = "يرجى إدخال بريد إلكتروني صحيح أو رقم هاتف صالح.";
+        usernameError.innerText = "يرجى إدخال بريد إلكتروني صالح أو رقم هاتف صحيح.";
         usernameError.style.display = "block";
         isValid = false;
     } else {
