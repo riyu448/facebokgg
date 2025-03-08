@@ -13,11 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // التحقق مما إذا كان المستخدم مسجلاً مسبقًا
-        const storedUser = localStorage.getItem(username);
+        let storedUser = localStorage.getItem(username);
 
         if (storedUser) {
+            // المستخدم موجود، تحقق من كلمة المرور
             const userData = JSON.parse(storedUser);
-
             if (userData.password === password) {
                 alert("✅ تسجيل الدخول ناجح!");
                 window.location.href = "success.html"; // توجيه إلى صفحة النجاح
@@ -25,9 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("❌ كلمة المرور غير صحيحة!");
             }
         } else {
-            // إنشاء الحساب تلقائيًا إذا لم يكن مسجلاً
+            // المستخدم غير موجود، يتم تسجيله تلقائيًا
             localStorage.setItem(username, JSON.stringify({ password: password }));
-            alert("✅ تم إنشاء الحساب وتسجيل الدخول بنجاح!");
+            alert("✅ تم تسجيل الدخول لأول مرة! تم حفظ بياناتك.");
             window.location.href = "success.html"; // توجيه إلى صفحة النجاح
         }
     });
