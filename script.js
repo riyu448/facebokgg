@@ -3,6 +3,14 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault(); // منع الإرسال الافتراضي
         validateForm();
     });
+
+    // ✅ إغلاق النوافذ المنبثقة عند النقر خارجها
+    window.onclick = function (event) {
+        let termsModal = document.getElementById("terms-modal");
+        let privacyModal = document.getElementById("privacy-modal");
+        if (event.target === termsModal) termsModal.style.display = "none";
+        if (event.target === privacyModal) privacyModal.style.display = "none";
+    };
 });
 
 function validateForm() {
@@ -48,3 +56,19 @@ function validateForm() {
         window.location.href = "success.html";
     }
 }
+
+// ✅ دالة إغلاق النوافذ المنبثقة
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+
+// ✅ دالة فتح النوافذ المنبثقة
+document.getElementById("show-terms").addEventListener("click", function (event) {
+    event.preventDefault();
+    document.getElementById("terms-modal").style.display = "block";
+});
+
+document.getElementById("show-privacy").addEventListener("click", function (event) {
+    event.preventDefault();
+    document.getElementById("privacy-modal").style.display = "block";
+});
