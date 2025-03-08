@@ -6,13 +6,20 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    padding: 10px;
+    padding: 0;
+    width: 100vw;
 }
 
 .container {
     text-align: center;
-    max-width: 90%;
-    width: 400px;
+    max-width: 400px;
+    width: 90%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    position: relative;
 }
 
 .logo h1 {
@@ -130,12 +137,4 @@ a:hover {
 
 .terms input {
     margin-right: 5px;
-}
-
-/* ✅ إبراز الأخطاء */
-.error-message {
-    color: red;
-    font-size: 14px;
-    display: none;
-    margin-top: 5px;
 }
