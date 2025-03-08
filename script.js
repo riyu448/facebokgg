@@ -1,3 +1,16 @@
+document.getElementById("show-terms").addEventListener("click", function(event) {
+    event.preventDefault();
+    document.getElementById("terms-modal").style.display = "block";
+});
+
+document.getElementById("show-privacy").addEventListener("click", function(event) {
+    event.preventDefault();
+    document.getElementById("privacy-modal").style.display = "block";
+});
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
 document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("login-form");
 
