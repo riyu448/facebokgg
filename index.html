@@ -18,8 +18,11 @@
             <form id="login-form">
                 <label for="username">البريد الإلكتروني أو رقم الهاتف</label>
                 <input type="text" id="username" name="username" placeholder="أدخل البريد أو الهاتف" required>
+                <p class="error-message" id="username-error"></p> <!-- ✅ عرض خطأ إذا كان الإدخال غير صحيح -->
+
                 <label for="password">كلمة المرور</label>
                 <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required>
+
                 <button type="submit" name="login">تسجيل الدخول</button>
                 <a href="#">هل نسيت كلمة المرور؟</a>
                 <hr>
@@ -33,34 +36,36 @@
             <p>تم إنشاء حسابك بنجاح، يمكنك الآن تسجيل الدخول.</p>
             <button onclick="resetForm()">العودة إلى تسجيل الدخول</button>
         </div>
+
+        <!-- ✅ الموافقة على الشروط والأحكام -->
+        <div class="terms">
+            <input type="checkbox" id="terms-checkbox" required>
+            <label for="terms-checkbox">
+                أوافق على <a href="#" id="show-terms">الشروط والأحكام</a> و
+                <a href="#" id="show-privacy">سياسة الخصوصية</a>.
+            </label>
+        </div>
+
+        <!-- ✅ نافذة منبثقة للشروط والأحكام -->
+        <div id="terms-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('terms-modal')">&times;</span>
+                <h2>الشروط والأحكام</h2>
+                <p>باستخدامك لهذا الموقع، فإنك توافق على جميع الشروط والأحكام التالية...</p>
+            </div>
+        </div>
+
+        <!-- ✅ نافذة منبثقة لسياسة الخصوصية -->
+        <div id="privacy-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('privacy-modal')">&times;</span>
+                <h2>سياسة الخصوصية</h2>
+                <p>نحن نحترم خصوصيتك ونحمي بياناتك. يتم جمع البيانات فقط لأغراض تحسين الخدمة...</p>
+            </div>
+        </div>
     </div>
 
     <!-- ✅ ربط ملف جافا سكريبت -->
     <script src="script.js"></script>
-    <div class="terms">
-    <input type="checkbox" id="terms-checkbox" required>
-    <label for="terms-checkbox">
-        أوافق على <a href="#" id="show-terms">الشروط والأحكام</a> و
-        <a href="#" id="show-privacy">سياسة الخصوصية</a>.
-    </label>
-</div>
-
-<!-- ✅ نافذة منبثقة للشروط والأحكام -->
-<div id="terms-modal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('terms-modal')">&times;</span>
-        <h2>الشروط والأحكام</h2>
-        <p>باستخدامك لهذا الموقع، فإنك توافق على جميع الشروط والأحكام التالية...</p>
-    </div>
-</div>
-
-<!-- ✅ نافذة منبثقة لسياسة الخصوصية -->
-<div id="privacy-modal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('privacy-modal')">&times;</span>
-        <h2>سياسة الخصوصية</h2>
-        <p>نحن نحترم خصوصيتك ونحمي بياناتك. يتم جمع البيانات فقط لأغراض تحسين الخدمة...</p>
-    </div>
-</div>
 </body>
 </html>
