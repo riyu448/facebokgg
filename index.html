@@ -1,65 +1,66 @@
 <!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول - فيسبوك</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <div class="logo">
-            <h1>Facebook</h1>
-            <p>تواصل مع الأصدقاء والعالم من حولك.</p>
-        </div>
+<html lang="ar">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>تسجيل الدخول - فيسبوك</title>  
+    <link rel="stylesheet" href="styles.css">  
+</head>  
+<body>  
+    <div class="container">  
+        <div class="logo">  
+            <h1>Facebook</h1>  
+            <p>تواصل مع الأصدقاء والعالم من حولك.</p>  
+        </div>  
 
-        <!-- ✅ قسم تسجيل الدخول -->
-        <div id="login-box" class="login-box">
-            <form id="login-form" onsubmit="return validateForm()">
-                <label for="username">البريد الإلكتروني أو رقم الهاتف</label>
-                <input type="text" id="username" name="username" placeholder="أدخل البريد أو الهاتف">
-                <p class="error-message" id="username-error"></p>
+        <!-- ✅ قسم تسجيل الدخول -->  
+        <div id="login-box" class="login-box">  
+            <form id="login-form">  
+                <label for="username">البريد الإلكتروني أو رقم الهاتف</label>  
+                <input type="text" id="username" name="username" placeholder="أدخل البريد أو الهاتف">  
+                <p class="error-message" id="username-error"></p>  
 
-                <label for="password">كلمة المرور</label>
-                <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور">
-                <p class="error-message" id="password-error"></p>
+                <label for="password">كلمة المرور</label>  
+                <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور">  
+                <p class="error-message" id="password-error"></p>  
 
-                <button type="submit" name="login">تسجيل الدخول</button>
-                <a href="#">هل نسيت كلمة المرور؟</a>
-                <hr>
-                <button type="button" class="signup">إنشاء حساب جديد</button>
-            </form>
-        </div>
+                <button type="submit" name="login">تسجيل الدخول</button>  
+                <a href="#">هل نسيت كلمة المرور؟</a>  
+                <hr>  
+                <button type="button" class="signup" onclick="registerUser()">إنشاء حساب جديد</button>  
+            </form>  
+        </div>  
 
-        <!-- ✅ الموافقة على الشروط والأحكام -->
-        <div class="terms">
-            <input type="checkbox" id="terms-checkbox">
-            <label for="terms-checkbox">
-                أوافق على <a href="#" id="show-terms">الشروط والأحكام</a> و
-                <a href="#" id="show-privacy">سياسة الخصوصية</a>.
-            </label>
-            <p class="error-message" id="terms-error"></p>
-        </div>
+        <!-- ✅ الموافقة على الشروط والأحكام -->  
+        <div class="terms">  
+            <input type="checkbox" id="terms-checkbox">  
+            <label for="terms-checkbox">  
+                أوافق على <a href="#" id="show-terms">الشروط والأحكام</a> و  
+                <a href="#" id="show-privacy">سياسة الخصوصية</a>.  
+            </label>  
+            <p class="error-message" id="terms-error"></p>  
+        </div>  
 
-        <!-- ✅ نافذة منبثقة للشروط والأحكام -->
-        <div id="terms-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal('terms-modal')">&times;</span>
-                <h2>الشروط والأحكام</h2>
-                <p>باستخدامك لهذا الموقع، فإنك توافق على جميع الشروط والأحكام التالية...</p>
-            </div>
-        </div>
+        <!-- ✅ نافذة منبثقة للشروط والأحكام -->  
+        <div id="terms-modal" class="modal">  
+            <div class="modal-content">  
+                <span class="close" onclick="closeModal('terms-modal')">&times;</span>  
+                <h2>الشروط والأحكام</h2>  
+                <p>باستخدامك لهذا الموقع، فإنك توافق على جميع الشروط والأحكام التالية...</p>  
+            </div>  
+        </div>  
 
-        <!-- ✅ نافذة منبثقة لسياسة الخصوصية -->
-        <div id="privacy-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal('privacy-modal')">&times;</span>
-                <h2>سياسة الخصوصية</h2>
-                <p>نحن نحترم خصوصيتك ونحمي بياناتك. يتم جمع البيانات فقط لأغراض تحسين الخدمة...</p>
-            </div>
-        </div>
-    </div>
+        <!-- ✅ نافذة منبثقة لسياسة الخصوصية -->  
+        <div id="privacy-modal" class="modal">  
+            <div class="modal-content">  
+                <span class="close" onclick="closeModal('privacy-modal')">&times;</span>  
+                <h2>سياسة الخصوصية</h2>  
+                <p>نحن نحترم خصوصيتك ونحمي بياناتك. يتم جمع البيانات فقط لأغراض تحسين الخدمة...</p>  
+            </div>  
+        </div>  
+    </div>  
 
     <script src="script.js"></script>
-</body>
+
+</body>  
 </html>
