@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function validateForm() {
-    let username = document.getElementById("username").value.trim();
-    let password = document.getElementById("password").value.trim();
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
     let termsChecked = document.getElementById("terms-checkbox").checked;
 
     let usernameError = document.getElementById("username-error");
@@ -24,21 +24,38 @@ function validateForm() {
 
     let isValid = true;
 
-    // ✅ التحقق من إدخال البريد أو الهاتف
-    if (username === "") {
+    // ✅ التحقق من صحة البريد الإلكتروني أو رقم الهاتف
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // التحقق من البريد الإلكتروني
+    let phoneRegex = /^\d{10,15}$/; // التحقق من رقم الهاتف (10-15 رقم)
+
+    if (username.value.trim() === "") {
+        username.style.border = "2px solid red";
         usernameError.innerText = "يرجى إدخال البريد الإلكتروني أو رقم الهاتف.";
         usernameError.style.display = "block";
         isValid = false;
+    } else if (!emailRegex.test(username.value) && !phoneRegex.test(username.value)) {
+        username.style.border = "2px solid red";
+        usernameError.innerText = "يرجى إدخال بريد إلكتروني صحيح أو رقم هاتف صالح.";
+        usernameError.style.display = "block";
+        isValid = false;
     } else {
+        username.style.border = "1px solid #ddd";
         usernameError.style.display = "none";
     }
 
-    // ✅ التحقق من إدخال كلمة المرور
-    if (password === "") {
+    // ✅ التحقق من صحة كلمة المرور
+    if (password.value.trim() === "") {
+        password.style.border = "2px solid red";
         passwordError.innerText = "يرجى إدخال كلمة المرور.";
         passwordError.style.display = "block";
         isValid = false;
+    } else if (password.value.length < 6) {
+        password.style.border = "2px solid red";
+        passwordError.innerText = "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل.";
+        passwordError.style.display = "block";
+        isValid = false;
     } else {
+        password.style.border = "1px solid #ddd";
         passwordError.style.display = "none";
     }
 
