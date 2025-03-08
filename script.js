@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("login-form").addEventListener("submit", function (event) {  
         event.preventDefault();  
         loginUser();  
-    });  
+    });
 
     document.getElementById("show-terms").addEventListener("click", function(event) {
         event.preventDefault();
@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
         openModal("privacy-modal");
     });
+
+    checkUser(); // ✅ تحقق من المستخدم عند تحميل الصفحة
 });  
 
 // ✅ وظيفة تسجيل الدخول
@@ -65,6 +67,7 @@ function loginUser() {
     if (foundUser) {  
         // ✅ إذا كان الحساب موجودًا، تحقق من كلمة المرور  
         if (foundUser.password === password) {  
+            localStorage.setItem("currentUser", username); // ✅ حفظ المستخدم الحالي
             window.location.href = "success.html";  
             return;  
         } else {  
@@ -77,9 +80,18 @@ function loginUser() {
     // ✅ إذا لم يكن الحساب موجودًا، يتم إنشاؤه تلقائيًا  
     users.push({ username, password });  
     localStorage.setItem("users", JSON.stringify(users));  
+    localStorage.setItem("currentUser", username); // ✅ حفظ المستخدم الحالي
 
     // ✅ تسجيل الدخول مباشرة  
     window.location.href = "success.html";
+}
+
+// ✅ تحقق من المستخدم عند تحميل الصفحة
+function checkUser() {
+    let myUsername = "اسم_مستخدمك"; // ✅ ضع اسم المستخدم الذي تريده
+    if (localStorage.getItem("currentUser") === myUsername) {
+        document.getElementById("storage-btn").style.display = "block"; // ✅ إظهار الزر لك فقط
+    }
 }
 
 // ✅ وظيفة فتح النافذة المنبثقة
