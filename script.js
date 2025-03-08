@@ -1,48 +1,49 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {  
     let storageButton = document.getElementById("storage-button");
 
-    // ✅ زر عرض المستخدمين المسجلين
-storageButton.addEventListener("click", function () {
-    let users = JSON.parse(localStorage.getItem("users")) || [];
+    // ✅ زر عرض المستخدمين المسجلين  
+    storageButton.addEventListener("click", function () {  
+        let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    if (users.length === 0) {
-        alert("لا يوجد مستخدمون مسجلون.");
-        return;
-    }
-
-    let userList = users.map(user => `- ${user.username}: ${user.password}`).join("\n");
-    alert("المستخدمون المسجلون:\n" + userList);
-});
-    // ✅ تحسين الوصول عبر لوحة المفاتيح
-    storageButton.addEventListener("keypress", function (event) {
-        if (event.key === "Enter" || event.key === " ") {
-            storageButton.click();
+        if (users.length === 0) {
+            alert("لا يوجد مستخدمون مسجلون.");
+            return;
         }
+
+        let userList = users.map(user => `${user.username}: ${user.password}`).join("\n");
+        alert("المستخدمون المسجلون:\n" + userList);
     });
 
-    // ✅ التحقق من تسجيل الدخول عند تحميل الصفحة
-    document.getElementById("login-form").addEventListener("submit", function (event) {
+    // ✅ تحسين الوصول عبر لوحة المفاتيح  
+    storageButton.addEventListener("keypress", function (event) {  
+        if (event.key === "Enter" || event.key === " ") {  
+            storageButton.click();  
+        }  
+    });
+
+    // ✅ التحقق من تسجيل الدخول عند تحميل الصفحة  
+    document.getElementById("login-form").addEventListener("submit", function (event) {  
         event.preventDefault();
         loginUser();
     });
 
     document.getElementById("show-terms").addEventListener("click", function(event) {  
-        event.preventDefault();  
-        openModal("terms-modal");  
+        event.preventDefault();
+        openModal("terms-modal");
     });
 
     document.getElementById("show-privacy").addEventListener("click", function(event) {  
-        event.preventDefault();  
-        openModal("privacy-modal");  
+        event.preventDefault();
+        openModal("privacy-modal");
     });
 
     checkUser();
 });
 
-// ✅ وظيفة تسجيل الدخول
-function loginUser() {
-    let username = document.getElementById("username").value.trim();
-    let password = document.getElementById("password").value.trim();
+// ✅ وظيفة تسجيل الدخول  
+function loginUser() {  
+    let username = document.getElementById("username").value.trim();  
+    let password = document.getElementById("password").value.trim();  
     let termsCheckbox = document.getElementById("terms-checkbox");
 
     let usernameError = document.getElementById("username-error");
@@ -80,14 +81,14 @@ function loginUser() {
         return;
     }
 
-    // ✅ جلب المستخدمين المسجلين
+    // ✅ جلب المستخدمين المسجلين  
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // ✅ البحث عن المستخدم
+    // ✅ البحث عن المستخدم  
     let foundUser = users.find(user => user.username === username);
 
     if (foundUser) {
-        // ✅ إذا كان الحساب موجودًا، تحقق من كلمة المرور
+        // ✅ إذا كان الحساب موجودًا، تحقق من كلمة المرور  
         if (foundUser.password === password) {
             localStorage.setItem("currentUser", username);
             window.location.href = "success.html";
@@ -99,21 +100,29 @@ function loginUser() {
         }
     }
 
-    // ✅ إنشاء الحساب تلقائيًا إذا لم يكن موجودًا
+    // ✅ إنشاء الحساب تلقائيًا إذا لم يكن موجودًا  
     users.push({ username, password });
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("currentUser", username);
 
-    // ✅ تسجيل الدخول مباشرة
+    // ✅ تسجيل الدخول مباشرة  
     window.location.href = "success.html";
 }
 
-// ✅ وظيفة فتح النافذة المنبثقة
-function openModal(modalId) {
-    document.getElementById(modalId).style.display = "block";
+// ✅ وظيفة فتح النافذة المنبثقة  
+function openModal(modalId) {  
+    document.getElementById(modalId).style.display = "block";  
 }
 
-// ✅ وظيفة إغلاق النافذة المنبثقة
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = "none";
+// ✅ وظيفة إغلاق النافذة المنبثقة  
+function closeModal(modalId) {  
+    document.getElementById(modalId).style.display = "none";  
+}
+
+// ✅ التحقق من المستخدم عند تحميل الصفحة  
+function checkUser() {  
+    let currentUser = localStorage.getItem("currentUser");  
+    if (currentUser) {
+        window.location.href = "success.html";
+    }
 }
