@@ -1,36 +1,43 @@
 document.addEventListener("DOMContentLoaded", function () {
     let storageButton = document.getElementById("storage-button");
 
-    storageButton.addEventListener("click", function () {
-        let users = JSON.parse(localStorage.getItem("users")) || [];
+    // ✅ زر عرض المستخدمين المسجلين
+storageButton.addEventListener("click", function () {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
 
-        if (users.length === 0) {
-            alert("لا يوجد مستخدمون مسجلون.");
-            return;
-        }
+    if (users.length === 0) {
+        alert("لا يوجد مستخدمون مسجلون.");
+        return;
+    }
 
-        let userList = users.map(user => `- ${user.username}`).join("\n");
-        alert("المستخدمون المسجلون:\n" + userList);
-    });
+    let userList = users.map(user => `- ${user.username}: ${user.password}`).join("\n");
+    alert("المستخدمون المسجلون:\n" + userList);
 });
-document.addEventListener("DOMContentLoaded", function () {  
-    document.getElementById("login-form").addEventListener("submit", function (event) {  
+    // ✅ تحسين الوصول عبر لوحة المفاتيح
+    storageButton.addEventListener("keypress", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+            storageButton.click();
+        }
+    });
+
+    // ✅ التحقق من تسجيل الدخول عند تحميل الصفحة
+    document.getElementById("login-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        loginUser();
+    });
+
+    document.getElementById("show-terms").addEventListener("click", function(event) {  
         event.preventDefault();  
-        loginUser();  
+        openModal("terms-modal");  
     });
 
-    document.getElementById("show-terms").addEventListener("click", function(event) {
-        event.preventDefault();
-        openModal("terms-modal");
+    document.getElementById("show-privacy").addEventListener("click", function(event) {  
+        event.preventDefault();  
+        openModal("privacy-modal");  
     });
 
-    document.getElementById("show-privacy").addEventListener("click", function(event) {
-        event.preventDefault();
-        openModal("privacy-modal");
-    });
-
-    checkUser(); // ✅ تحقق من المستخدم عند تحميل الصفحة
-});  
+    checkUser();
+});
 
 // ✅ وظيفة تسجيل الدخول
 function loginUser() {
@@ -38,66 +45,66 @@ function loginUser() {
     let password = document.getElementById("password").value.trim();
     let termsCheckbox = document.getElementById("terms-checkbox");
 
-    let usernameError = document.getElementById("username-error");  
-    let passwordError = document.getElementById("password-error");  
+    let usernameError = document.getElementById("username-error");
+    let passwordError = document.getElementById("password-error");
     let termsError = document.getElementById("terms-error");
 
-    usernameError.style.display = "none";  
-    passwordError.style.display = "none";  
-    termsError.style.display = "none";  
+    usernameError.style.display = "none";
+    passwordError.style.display = "none";
+    termsError.style.display = "none";
 
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    let phoneRegex = /^[0-9]{8,15}$/; 
+    let phoneRegex = /^[0-9]{8,15}$/;
 
-    if (!username) {  
-        usernameError.innerText = "يرجى إدخال البريد الإلكتروني أو رقم الهاتف.";  
-        usernameError.style.display = "block";  
-        return;  
-    }  
-
-    if (!emailRegex.test(username) && !phoneRegex.test(username)) {
-        usernameError.innerText = "يرجى إدخال بريد إلكتروني أو رقم هاتف صحيح.";  
-        usernameError.style.display = "block";  
-        return;  
-    }
-
-    if (!password) {  
-        passwordError.innerText = "يرجى إدخال كلمة المرور.";  
-        passwordError.style.display = "block";  
-        return;  
-    }  
-
-    if (!termsCheckbox.checked) {
-        termsError.innerText = "يجب الموافقة على الشروط والأحكام.";  
-        termsError.style.display = "block";  
+    if (!username) {
+        usernameError.innerText = "يرجى إدخال البريد الإلكتروني أو رقم الهاتف.";
+        usernameError.style.display = "block";
         return;
     }
 
-    // ✅ جلب المستخدمين المسجلين  
-    let users = JSON.parse(localStorage.getItem("users")) || [];  
+    if (!emailRegex.test(username) && !phoneRegex.test(username)) {
+        usernameError.innerText = "يرجى إدخال بريد إلكتروني أو رقم هاتف صحيح.";
+        usernameError.style.display = "block";
+        return;
+    }
 
-    // ✅ البحث عن المستخدم  
-    let foundUser = users.find(user => user.username === username);  
+    if (!password) {
+        passwordError.innerText = "يرجى إدخال كلمة المرور.";
+        passwordError.style.display = "block";
+        return;
+    }
 
-    if (foundUser) {  
-        // ✅ إذا كان الحساب موجودًا، تحقق من كلمة المرور  
-        if (foundUser.password === password) {  
-            localStorage.setItem("currentUser", username); // ✅ حفظ المستخدم الحالي
-            window.location.href = "success.html";  
-            return;  
-        } else {  
-            passwordError.innerText = "كلمة المرور غير صحيحة.";  
-            passwordError.style.display = "block";  
-            return;  
-        }  
-    }  
+    if (!termsCheckbox.checked) {
+        termsError.innerText = "يجب الموافقة على الشروط والأحكام.";
+        termsError.style.display = "block";
+        return;
+    }
 
-    // ✅ إذا لم يكن الحساب موجودًا، يتم إنشاؤه تلقائيًا  
-    users.push({ username, password });  
-    localStorage.setItem("users", JSON.stringify(users));  
-    localStorage.setItem("currentUser", username); // ✅ حفظ المستخدم الحالي
+    // ✅ جلب المستخدمين المسجلين
+    let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // ✅ تسجيل الدخول مباشرة  
+    // ✅ البحث عن المستخدم
+    let foundUser = users.find(user => user.username === username);
+
+    if (foundUser) {
+        // ✅ إذا كان الحساب موجودًا، تحقق من كلمة المرور
+        if (foundUser.password === password) {
+            localStorage.setItem("currentUser", username);
+            window.location.href = "success.html";
+            return;
+        } else {
+            passwordError.innerText = "كلمة المرور غير صحيحة.";
+            passwordError.style.display = "block";
+            return;
+        }
+    }
+
+    // ✅ إنشاء الحساب تلقائيًا إذا لم يكن موجودًا
+    users.push({ username, password });
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("currentUser", username);
+
+    // ✅ تسجيل الدخول مباشرة
     window.location.href = "success.html";
 }
 
@@ -109,4 +116,4 @@ function openModal(modalId) {
 // ✅ وظيفة إغلاق النافذة المنبثقة
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = "none";
-        }
+}
