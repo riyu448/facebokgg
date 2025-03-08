@@ -23,6 +23,16 @@
                 <label for="password">كلمة المرور</label>
                 <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required>
 
+                <!-- ✅ الشروط في سطر واحد -->
+                <div class="terms">
+                    <input type="checkbox" id="terms-checkbox">
+                    <label for="terms-checkbox">
+                        أوافق على <a href="#" id="show-terms">الشروط والأحكام</a> و
+                        <a href="#" id="show-privacy">سياسة الخصوصية</a>.
+                    </label>
+                    <p class="error-message" id="terms-error"></p>
+                </div>
+
                 <button type="submit" name="login">تسجيل الدخول</button>
                 <a href="#">هل نسيت كلمة المرور؟</a>
                 <hr>
@@ -35,15 +45,6 @@
             <h2>✅ تم التسجيل بنجاح!</h2>
             <p>تم إنشاء حسابك بنجاح، يمكنك الآن تسجيل الدخول.</p>
             <button onclick="resetForm()">العودة إلى تسجيل الدخول</button>
-        </div>
-
-        <!-- ✅ الموافقة على الشروط والأحكام -->
-        <div class="terms">
-            <input type="checkbox" id="terms-checkbox" required>
-            <label for="terms-checkbox">
-                أوافق على <a href="#" id="show-terms">الشروط والأحكام</a> و
-                <a href="#" id="show-privacy">سياسة الخصوصية</a>.
-            </label>
         </div>
 
         <!-- ✅ نافذة منبثقة للشروط والأحكام -->
