@@ -6,29 +6,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value.trim();
+        const termsCheckbox = document.getElementById("terms-checkbox");
 
-        if (username === "" || password === "") {
-            alert("❌ يجب ملء جميع الحقول!");
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^[0-9]{8,15}$/;
+
+        if (!emailRegex.test(username) && !phoneRegex.test(username)) {
+            alert("❌ الرجاء إدخال بريد إلكتروني صحيح أو رقم هاتف صحيح!");
             return;
         }
 
-        // التحقق مما إذا كان المستخدم مسجلاً مسبقًا
+        if (password === "") {
+            alert("❌ يجب إدخال كلمة المرور!");
+            return;
+        }
+
+        if (!termsCheckbox.checked) {
+            alert("❌ يجب الموافقة على الشروط والأحكام قبل المتابعة!");
+            return;
+        }
+
         let storedUser = localStorage.getItem(username);
 
         if (storedUser) {
-            // المستخدم موجود، تحقق من كلمة المرور
             const userData = JSON.parse(storedUser);
             if (userData.password === password) {
-                alert("✅ تسجيل الدخول ناجح!");
-                window.location.href = "success.html"; // توجيه إلى صفحة النجاح
+                window.location.href = "success.html";
             } else {
                 alert("❌ كلمة المرور غير صحيحة!");
             }
         } else {
-            // المستخدم غير موجود، يتم تسجيله تلقائيًا
             localStorage.setItem(username, JSON.stringify({ password: password }));
-            alert("✅ تم تسجيل الدخول لأول مرة! تم حفظ بياناتك.");
-            window.location.href = "success.html"; // توجيه إلى صفحة النجاح
+            window.location.href = "success.html";
         }
     });
 });
