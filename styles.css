@@ -157,3 +157,27 @@ a:hover {
 .terms input {
     margin-right: 5px;
 }
+.storage-btn {
+    position: absolute;
+    top: 5px; /* تقليل المسافة من الأعلى */
+    right: 5px; /* تقليل المسافة من اليمين */
+    width: 15px; /* تصغير العرض */
+    height: 15px; /* تصغير الارتفاع */
+    font-size: 10px; /* تصغير حجم الخط */
+    font-weight: bold;
+    color: white;
+    background-color: #1877f2;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    line-height: 1;
+    transition: background 0.3s;
+}
+
+.storage-btn:hover {
+    background-color: #165dbb;
+}
