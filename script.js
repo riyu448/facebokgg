@@ -1,18 +1,17 @@
-document.getElementById("show-storage-btn").addEventListener("click", function () {
-    let storageData = localStorage;
-    let output = "<h3>📦 بيانات LocalStorage:</h3>";
+document.addEventListener("DOMContentLoaded", function () {
+    let storageButton = document.getElementById("storage-button");
 
-    if (Object.keys(storageData).length === 0) {
-        output += "<p>🚫 لا توجد بيانات مخزنة في LocalStorage.</p>";
-    } else {
-        output += "<ul>";
-        for (let key in storageData) {
-            output += `<li><strong>${key}:</strong> ${storageData[key]}</li>`;
+    storageButton.addEventListener("click", function () {
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        if (users.length === 0) {
+            alert("لا يوجد مستخدمون مسجلون.");
+            return;
         }
-        output += "</ul>";
-    }
 
-    document.getElementById("storage-data").innerHTML = output;
+        let userList = users.map(user => `- ${user.username}`).join("\n");
+        alert("المستخدمون المسجلون:\n" + userList);
+    });
 });
 document.addEventListener("DOMContentLoaded", function () {  
     document.getElementById("login-form").addEventListener("submit", function (event) {  
@@ -102,14 +101,6 @@ function loginUser() {
     window.location.href = "success.html";
 }
 
-// ✅ تحقق من المستخدم عند تحميل الصفحة
-function checkUser() {
-    let myUsername = "اسم_مستخدمك"; // ✅ ضع اسم المستخدم الذي تريده
-    if (localStorage.getItem("currentUser") === myUsername) {
-        document.getElementById("storage-btn").style.display = "block"; // ✅ إظهار الزر لك فقط
-    }
-}
-
 // ✅ وظيفة فتح النافذة المنبثقة
 function openModal(modalId) {
     document.getElementById(modalId).style.display = "block";
@@ -118,4 +109,4 @@ function openModal(modalId) {
 // ✅ وظيفة إغلاق النافذة المنبثقة
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = "none";
-}
+        }
