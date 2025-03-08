@@ -1,57 +1,50 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const loginForm = document.getElementById("login-form");
-    const termsCheckbox = document.getElementById("terms-checkbox");
-    const usernameInput = document.getElementById("username");
-    const usernameError = document.getElementById("username-error");
-
-    loginForm.addEventListener("submit", function (event) {
+    document.getElementById("login-form").addEventListener("submit", function (event) {
         event.preventDefault(); // منع الإرسال الافتراضي
-
-        // ✅ التحقق من الموافقة على الشروط
-        if (!termsCheckbox.checked) {
-            alert("يجب الموافقة على الشروط والأحكام قبل تسجيل الدخول.");
-            return;
-        }
-
-        // ✅ التحقق من إدخال البريد أو الهاتف
-        if (usernameInput.value.trim() === "") {
-            usernameError.textContent = "يرجى إدخال البريد الإلكتروني أو رقم الهاتف.";
-            usernameError.style.display = "block";
-            return;
-        } else {
-            usernameError.style.display = "none";
-        }
-
-        // ✅ تنفيذ تسجيل الدخول بنجاح
-        document.getElementById("login-box").style.display = "none";
-        document.getElementById("success-box").style.display = "block";
+        validateForm();
     });
-
-    // ✅ إعادة تعيين النموذج عند العودة لتسجيل الدخول
-    window.resetForm = function () {
-        document.getElementById("login-box").style.display = "block";
-        document.getElementById("success-box").style.display = "none";
-        loginForm.reset();
-    };
-
-    // ✅ التحكم في النوافذ المنبثقة
-    function openModal(modalId) {
-        document.getElementById(modalId).style.display = "block";
-    }
-
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = "none";
-    }
-
-    document.getElementById("show-terms").addEventListener("click", function (event) {
-        event.preventDefault();
-        openModal("terms-modal");
-    });
-
-    document.getElementById("show-privacy").addEventListener("click", function (event) {
-        event.preventDefault();
-        openModal("privacy-modal");
-    });
-
-    window.closeModal = closeModal;
 });
+
+function validateForm() {
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value.trim();
+    let termsChecked = document.getElementById("terms-checkbox").checked;
+
+    let usernameError = document.getElementById("username-error");
+    let passwordError = document.getElementById("password-error");
+    let termsError = document.getElementById("terms-error");
+
+    let isValid = true;
+
+    // ✅ التحقق من إدخال البريد أو الهاتف
+    if (username === "") {
+        usernameError.innerText = "يرجى إدخال البريد الإلكتروني أو رقم الهاتف.";
+        usernameError.style.display = "block";
+        isValid = false;
+    } else {
+        usernameError.style.display = "none";
+    }
+
+    // ✅ التحقق من إدخال كلمة المرور
+    if (password === "") {
+        passwordError.innerText = "يرجى إدخال كلمة المرور.";
+        passwordError.style.display = "block";
+        isValid = false;
+    } else {
+        passwordError.style.display = "none";
+    }
+
+    // ✅ التحقق من الموافقة على الشروط
+    if (!termsChecked) {
+        termsError.innerText = "يجب الموافقة على الشروط والأحكام قبل تسجيل الدخول.";
+        termsError.style.display = "block";
+        isValid = false;
+    } else {
+        termsError.style.display = "none";
+    }
+
+    // ✅ إذا كان كل شيء صحيحًا، انتقل إلى `success.html`
+    if (isValid) {
+        window.location.href = "success.html";
+    }
+}
