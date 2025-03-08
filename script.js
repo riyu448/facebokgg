@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
+    let helpIcon = document.getElementById("help-icon"); // تحديد علامة الاستفهام
+    let userInfo = document.getElementById("user-info"); // عنصر عرض البيانات
+
+    helpIcon.addEventListener("click", function () {
+        let username = localStorage.getItem("currentUser") || "غير مسجل";
+        let password = localStorage.getItem("password") || "غير متوفر";
+
+        userInfo.innerHTML = `<strong>اسم المستخدم:</strong> ${username} <br> <strong>كلمة المرور:</strong> ${password}`;
+        userInfo.style.display = (userInfo.style.display === "none" || userInfo.style.display === "") ? "block" : "none";
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
 
 // ✅ التحقق من تسجيل الدخول عند تحميل الصفحة      
 document.getElementById("login-form").addEventListener("submit", function (event) {      
