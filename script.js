@@ -1,3 +1,15 @@
+document.getElementById("login-form").addEventListener("submit", function(event) {
+    let termsCheckbox = document.getElementById("terms-checkbox");
+    let termsError = document.getElementById("terms-error");
+
+    if (!termsCheckbox.checked) {
+        event.preventDefault(); // منع الإرسال
+        termsError.textContent = "يجب عليك الموافقة على الشروط والأحكام للمتابعة.";
+        termsError.style.display = "block";
+    } else {
+        termsError.style.display = "none";
+    }
+});
 document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("login-form");
     const usernameInput = document.getElementById("username");
