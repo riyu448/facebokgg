@@ -3,30 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فيسبوك - تسجيل الدخول</title>
+    <title>تسجيل الدخول - فيسبوك</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <div class="logo">
-            <h1>facebook</h1>
-            <p>يساعدك فيسبوك على التواصل ومشاركة اللحظات مع الأشخاص في حياتك.</p>
+            <h1>Facebook</h1>
+            <p>تواصل مع الأصدقاء والعالم من حولك.</p>
         </div>
 
-        <div class="login-box">
+        <!-- ✅ قسم تسجيل الدخول -->
+        <div id="login-box" class="login-box">
             <form id="login-form">
-                <input type="text" id="username" name="username" placeholder="البريد الإلكتروني أو رقم الهاتف" required>
-                <input type="password" id="password" name="password" placeholder="كلمة المرور" required>
-                <button type="submit">تسجيل الدخول</button>
+                <label for="username">البريد الإلكتروني أو رقم الهاتف</label>
+                <input type="text" id="username" name="username" placeholder="أدخل البريد أو الهاتف" required>
+                <p class="error-message" id="username-error"></p>
+
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required>
+
+                <!-- ✅ الشروط في سطر واحد -->
+                <div class="terms">
+                    <input type="checkbox" id="terms-checkbox">
+                    <label for="terms-checkbox">
+                        أوافق على <a href="#" id="show-terms">الشروط والأحكام</a> و  
+                        <a href="#" id="show-privacy">سياسة الخصوصية</a>.
+                    </label>
+                    <p class="error-message" id="terms-error"></p>
+                </div>
+
+                <button type="submit" name="login">تسجيل الدخول</button>
                 <a href="#">هل نسيت كلمة المرور؟</a>
                 <hr>
                 <button type="button" class="signup">إنشاء حساب جديد</button>
             </form>
         </div>
 
-        <p class="footer">إنشاء صفحة للمشاهير أو العلامات التجارية.</p>
+        <!-- ✅ قسم نجاح التسجيل -->
+        <div id="success-box" class="success-box" style="display: none;">
+            <h2>✅ تم التسجيل بنجاح!</h2>
+            <p>تم إنشاء حسابك بنجاح، يمكنك الآن تسجيل الدخول.</p>
+            <button onclick="resetForm()">العودة إلى تسجيل الدخول</button>
+        </div>
+
+        <!-- ✅ نافذة منبثقة للشروط والأحكام -->
+        <div id="terms-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('terms-modal')">&times;</span>
+                <h2>الشروط والأحكام</h2>
+                <p>باستخدامك لهذا الموقع، فإنك توافق على جميع الشروط والأحكام التالية...</p>
+            </div>
+        </div>
+
+        <!-- ✅ نافذة منبثقة لسياسة الخصوصية -->
+        <div id="privacy-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('privacy-modal')">&times;</span>
+                <h2>سياسة الخصوصية</h2>
+                <p>نحن نحترم خصوصيتك ونحمي بياناتك. يتم جمع البيانات فقط لأغراض تحسين الخدمة...</p>
+            </div>
+        </div>
     </div>
 
+    <!-- ✅ ربط ملف جافا سكريبت -->
     <script src="script.js"></script>
 </body>
 </html>
