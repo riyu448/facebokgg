@@ -1,47 +1,62 @@
+/* الجسم يأخذ كامل العرض والارتفاع ويقوم بتوسيط المحتوى */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+    height: 100vh; /* يعين الارتفاع الكامل للنافذة */
+    text-align: center; /* توسيط النصوص في الجسم */
+    overflow: hidden; /* منع التمرير */
 }
 
+/* تأكد من أن الحاوية تحتوي على التنسيق الصحيح */
 .container {
     text-align: center;
-    max-width: 90%;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* لضمان أن المحتوى في المنتصف */
+    width: 100%;
+    max-width: 400px;  /* عرض ثابت للحاوية */
+    margin-right: 70px;
+    margin-left: 25px;
+    padding-top: 20px; /* إضافة هامش من الأعلى */
 }
 
+/* ضبط عنوان "Facebook" */
 .logo h1 {
     color: #1877f2;
     font-size: clamp(1.8rem, 5vw, 3rem);
-    margin-bottom: 5px;
+    margin-bottom: 10px; /* زيادة المسافة السفلية بين العنوان والنص التالي */
+    margin-left: 55px;
+    position: relative;
+    top: -100px; /* تحريك العنوان للأعلى */
 }
 
 .logo p {
     color: #606770;
     font-size: clamp(1rem, 3vw, 1.2rem);
-    margin-bottom: 20px;
+    margin-top: -5px; /* تحريك النص للأعلى */
+    margin-bottom: 20px; /* زيادة المسافة السفلية لتحسين التباعد */
+    margin-left: 55px;
+    position: relative;
+    top: -80px; /* تحريك النص للأعلى */
 }
 
+/* تأكد من أن نموذج تسجيل الدخول يظهر في المنتصف */
 .login-box {
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 400px;  /* عرض ثابت للنموذج */
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: -30px;
 }
 
+/* تنسيق حقول الإدخال */
 input {
     width: calc(100% - 20px);
     padding: 12px;
@@ -51,12 +66,14 @@ input {
     font-size: 16px;
 }
 
+/* رسائل الخطأ */
 .error-message {
     color: red;
     font-size: 14px;
     display: none;
 }
 
+/* أزرار تسجيل الدخول وإنشاء حساب */
 button {
     width: 100%;
     padding: 12px;
@@ -82,6 +99,7 @@ button.signup:hover {
     background: #36a420;
 }
 
+/* روابط مثل "هل نسيت كلمة المرور؟" */
 a {
     display: inline;
     margin: 0 5px;
@@ -94,7 +112,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ✅ تحسين النافذة المنبثقة */
+/* نافذة منبثقة للشروط والأحكام */
 .modal {
     display: none;
     position: fixed;
@@ -124,11 +142,12 @@ a:hover {
     cursor: pointer;
 }
 
-/* ✅ ضبط عرض شروط الاستخدام في سطر واحد */
+/* ضبط عرض شروط الاستخدام في سطر واحد */
 .terms {
     text-align: center;
     font-size: 14px;
-    margin: 10px 0;
+    margin-left: 50px;
+    height: 65px;
 }
 
 .terms label {
