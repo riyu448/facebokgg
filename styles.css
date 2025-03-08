@@ -1,4 +1,4 @@
-/* الجسم يأخذ كامل العرض والارتفاع ويقوم بتوسيط المحتوى */
+/* ✅ تنسيق الجسم */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f2f5;
@@ -7,56 +7,56 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* يعين الارتفاع الكامل للنافذة */
-    text-align: center; /* توسيط النصوص في الجسم */
-    overflow: hidden; /* منع التمرير */
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
 }
 
-/* تأكد من أن الحاوية تحتوي على التنسيق الصحيح */
+/* ✅ تنسيق الحاوية */
 .container {
     text-align: center;
     width: 100%;
-    max-width: 400px;  /* عرض ثابت للحاوية */
+    max-width: 400px;
     margin-right: 70px;
     margin-left: 25px;
-    padding-top: 20px; /* إضافة هامش من الأعلى */
+    padding-top: 20px;
 }
 
-/* ضبط عنوان "Facebook" */
+/* ✅ تنسيق عنوان "Facebook" */
 .logo h1 {
     color: #1877f2;
     font-size: clamp(1.8rem, 5vw, 3rem);
-    margin-bottom: 10px; /* زيادة المسافة السفلية بين العنوان والنص التالي */
+    margin-bottom: 10px;
     margin-left: 55px;
     position: relative;
-    top: -100px; /* تحريك العنوان للأعلى */
+    top: -100px;
 }
 
 .logo p {
     color: #606770;
     font-size: clamp(1rem, 3vw, 1.2rem);
-    margin-top: -5px; /* تحريك النص للأعلى */
-    margin-bottom: 20px; /* زيادة المسافة السفلية لتحسين التباعد */
+    margin-top: -5px;
+    margin-bottom: 20px;
     margin-left: 55px;
     position: relative;
-    top: -80px; /* تحريك النص للأعلى */
+    top: -80px;
 }
 
-/* تأكد من أن نموذج تسجيل الدخول يظهر في المنتصف */
+/* ✅ تنسيق صندوق تسجيل الدخول */
 .login-box {
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px;  /* عرض ثابت للنموذج */
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: -30px;
 }
 
-/* تنسيق حقول الإدخال */
+/* ✅ تنسيق حقول الإدخال */
 input {
     width: calc(100% - 20px);
     padding: 12px;
@@ -66,14 +66,14 @@ input {
     font-size: 16px;
 }
 
-/* رسائل الخطأ */
+/* ✅ تنسيق رسائل الخطأ */
 .error-message {
     color: red;
     font-size: 14px;
     display: none;
 }
 
-/* أزرار تسجيل الدخول وإنشاء حساب */
+/* ✅ تنسيق أزرار تسجيل الدخول وإنشاء حساب */
 button {
     width: 100%;
     padding: 12px;
@@ -99,7 +99,7 @@ button.signup:hover {
     background: #36a420;
 }
 
-/* روابط مثل "هل نسيت كلمة المرور؟" */
+/* ✅ تنسيق الروابط */
 a {
     display: inline;
     margin: 0 5px;
@@ -112,7 +112,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* نافذة منبثقة للشروط والأحكام */
+/* ✅ تنسيق النوافذ المنبثقة */
 .modal {
     display: none;
     position: fixed;
@@ -142,7 +142,7 @@ a:hover {
     cursor: pointer;
 }
 
-/* ضبط عرض شروط الاستخدام في سطر واحد */
+/* ✅ تحسين تنسيق قسم الشروط */
 .terms {
     text-align: center;
     font-size: 14px;
@@ -157,13 +157,15 @@ a:hover {
 .terms input {
     margin-right: 5px;
 }
+
+/* ✅ تحسين تصميم زر localStorage */
 .storage-btn {
     position: absolute;
-    top: 5px; /* تقليل المسافة من الأعلى */
-    right: 5px; /* تقليل المسافة من اليمين */
-    width: 15px; /* تصغير العرض */
-    height: 15px; /* تصغير الارتفاع */
-    font-size: 10px; /* تصغير حجم الخط */
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
     font-weight: bold;
     color: white;
     background-color: #1877f2;
@@ -175,9 +177,22 @@ a:hover {
     align-items: center;
     padding: 0;
     line-height: 1;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* ✅ تأثير عند تمرير الماوس على زر localStorage */
 .storage-btn:hover {
     background-color: #165dbb;
+    transform: scale(1.1);
+}
+
+/* ✅ إضافة تأثير عند الضغط */
+.storage-btn:active {
+    transform: scale(0.9);
+}
+
+/* ✅ تحسين إمكانية الوصول عبر لوحة المفاتيح */
+.storage-btn:focus {
+    outline: 2px solid white;
 }
