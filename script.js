@@ -12,31 +12,22 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // ✅ إرسال البيانات إلى Google Sheets عبر Google Apps Script
-        fetch("https://script.google.com/macros/s/AKfycbzfQtiSWT8mNqjuIYECK7-m9UTyaYuY1wCtBVaQE6UeGzsRuSX90qt8dgNHo61X_1bq/exec", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: username, 
-                password: password
-            })
-        })
-        .then(response => response.json()) // محاولة تحليل JSON من الاستجابة
-        .then(data => {
-            if (data.status === "success") {
-                alert("✅ تم حفظ البيانات بنجاح في Google Sheets!");
+        // ✅ التحقق مما إذا كان المستخدم مسجل في `localStorage`
+        const storedUser = localStorage.getItem(username);
+        if (storedUser) {
+            const userData = JSON.parse(storedUser);
+            if (userData.password === password) {
+                alert("✅ تسجيل الدخول ناجح!");
+                
+                // ✅ إخفاء نموذج تسجيل الدخول وعرض رسالة النجاح
                 document.getElementById("login-box").style.display = "none";
                 document.getElementById("success-box").style.display = "block";
             } else {
-                alert("❌ حدث خطأ أثناء حفظ البيانات!");
+                alert("❌ كلمة المرور غير صحيحة!");
             }
-        })
-        .catch(error => {
-            console.error("❌ خطأ في الاتصال:", error);
-            alert("❌ لم يتمكن من إرسال البيانات!");
-        });
+        } else {
+            alert("❌ المستخدم غير مسجل! يرجى إنشاء حساب أولًا.");
+        }
     });
 
     // ✅ زر التسجيل (إضافة مستخدم جديد)
@@ -49,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (username && password) {
                 if (!localStorage.getItem(username)) {
                     localStorage.setItem(username, JSON.stringify({ password: password }));
-                    alert("✅ تم إنشاء الحساب بنجاح!");
+                    alert("✅ تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.");
                 } else {
                     alert("❌ هذا المستخدم مسجل بالفعل!");
                 }
@@ -59,3 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+// ✅ دالة لإعادة ضبط النموذج
+function resetForm() {
+    document.getElementById("login-box").style.display = "block";
+    document.getElementById("success-box").style.display = "none";
+    document.getElementById("login-form").reset();
+}
