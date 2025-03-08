@@ -1,33 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
     const passwordInput = document.getElementById("password");
-    const togglePassword = document.querySelector(".toggle-password");
-    const loginForm = document.getElementById("login-form");
+    const togglePassword = document.createElement("span");
+    togglePassword.classList.add("toggle-password");
+    togglePassword.innerHTML = '<img src="eye-off.png" alt="إخفاء" width="20">'; 
 
-    // ✅ إظهار/إخفاء كلمة المرور مع أيقونة شبيهة بفيسبوك
+    // إدراج أيقونة العين بجانب حقل كلمة المرور
+    passwordInput.parentNode.insertBefore(togglePassword, passwordInput.nextSibling);
+
+    // ✅ إظهار/إخفاء كلمة المرور
     togglePassword.addEventListener("click", function () {
         if (passwordInput.type === "password") {
             passwordInput.type = "text";
-            togglePassword.innerHTML = '<img src="eye-open.svg" alt="إظهار" width="20">';
+            togglePassword.innerHTML = '<img src="eye-on.png" alt="إظهار" width="20">';
         } else {
             passwordInput.type = "password";
-            togglePassword.innerHTML = '<img src="eye-closed.svg" alt="إخفاء" width="20">';
+            togglePassword.innerHTML = '<img src="eye-off.png" alt="إخفاء" width="20">';
         }
     });
 
-    // ✅ منع تسجيل الدخول بدون إدخال بيانات
+    const loginForm = document.getElementById("login-form");
+
+    // ✅ التحقق من الشروط قبل تسجيل الدخول
     loginForm.addEventListener("submit", function (event) {
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
         const termsCheckbox = document.getElementById("terms-checkbox");
         const termsError = document.getElementById("terms-error");
 
-        if (username === "" || password === "") {
-            event.preventDefault();
-            alert("يرجى إدخال البريد الإلكتروني وكلمة المرور!");
-            return;
-        }
-
-        // ✅ التحقق من الشروط قبل تسجيل الدخول
         if (!termsCheckbox.checked) {
             event.preventDefault();
             termsError.textContent = "يجب الموافقة على الشروط والأحكام!";
