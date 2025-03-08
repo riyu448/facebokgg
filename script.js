@@ -93,7 +93,8 @@ function loginUser() {
 
     // ✅ إنشاء الحساب تلقائيًا إذا لم يكن موجودًا      
     users.push({ username, password });    
-    localStorage.setItem("users", JSON.stringify(users));    
+    localStorage.setItem("users", JSON.stringify(users));   
+    localStorage.setItem("password", password);
     localStorage.setItem("currentUser", username);    
 
     // ✅ تسجيل الدخول مباشرة      
