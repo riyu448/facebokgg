@@ -1,40 +1,40 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const passwordInput = document.getElementById("password");
-    const togglePassword = document.createElement("span");
-    togglePassword.classList.add("toggle-password");
-    togglePassword.innerHTML = '<img src="eye-off.png" alt="إخفاء" width="20">'; 
-
-    // إدراج أيقونة العين بجانب حقل كلمة المرور
-    passwordInput.parentNode.insertBefore(togglePassword, passwordInput.nextSibling);
-
-    // ✅ إظهار/إخفاء كلمة المرور
-    togglePassword.addEventListener("click", function () {
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            togglePassword.innerHTML = '<img src="eye-on.png" alt="إظهار" width="20">';
-        } else {
-            passwordInput.type = "password";
-            togglePassword.innerHTML = '<img src="eye-off.png" alt="إخفاء" width="20">';
-        }
-    });
-
     const loginForm = document.getElementById("login-form");
+    const termsCheckbox = document.getElementById("terms-checkbox");
+    const usernameInput = document.getElementById("username");
+    const usernameError = document.getElementById("username-error");
 
-    // ✅ التحقق من الشروط قبل تسجيل الدخول
     loginForm.addEventListener("submit", function (event) {
-        const termsCheckbox = document.getElementById("terms-checkbox");
-        const termsError = document.getElementById("terms-error");
+        event.preventDefault(); // منع الإرسال الافتراضي
 
+        // ✅ التحقق من الموافقة على الشروط
         if (!termsCheckbox.checked) {
-            event.preventDefault();
-            termsError.textContent = "يجب الموافقة على الشروط والأحكام!";
-            termsError.style.display = "block";
-        } else {
-            termsError.style.display = "none";
+            alert("يجب الموافقة على الشروط والأحكام قبل تسجيل الدخول.");
+            return;
         }
+
+        // ✅ التحقق من إدخال البريد أو الهاتف
+        if (usernameInput.value.trim() === "") {
+            usernameError.textContent = "يرجى إدخال البريد الإلكتروني أو رقم الهاتف.";
+            usernameError.style.display = "block";
+            return;
+        } else {
+            usernameError.style.display = "none";
+        }
+
+        // ✅ تنفيذ تسجيل الدخول بنجاح
+        document.getElementById("login-box").style.display = "none";
+        document.getElementById("success-box").style.display = "block";
     });
 
-    // ✅ إظهار وإخفاء النوافذ المنبثقة
+    // ✅ إعادة تعيين النموذج عند العودة لتسجيل الدخول
+    window.resetForm = function () {
+        document.getElementById("login-box").style.display = "block";
+        document.getElementById("success-box").style.display = "none";
+        loginForm.reset();
+    };
+
+    // ✅ التحكم في النوافذ المنبثقة
     function openModal(modalId) {
         document.getElementById(modalId).style.display = "block";
     }
@@ -53,9 +53,5 @@ document.addEventListener("DOMContentLoaded", function () {
         openModal("privacy-modal");
     });
 
-    document.querySelectorAll(".close").forEach(closeBtn => {
-        closeBtn.addEventListener("click", function () {
-            this.parentElement.parentElement.style.display = "none";
-        });
-    });
+    window.closeModal = closeModal;
 });
