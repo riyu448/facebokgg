@@ -59,11 +59,21 @@
             </div>  
         </div>  
     </div>  
+<button id="storage-btn" style="display: none;" onclick="showLocalStorage()">عرض بيانات LocalStorage</button>
 
-    <!-- ✅ زر عرض LocalStorage (مخفي بشكل افتراضي) -->
-    <button id="storage-btn" style="display: none;" onclick="showLocalStorage()">عرض بيانات LocalStorage</button>
+<script>
+    function showLocalStorage() {
+        alert(JSON.stringify(localStorage, null, 2));
+    }
 
-    <!-- ✅ تضمين ملف JavaScript -->
-    <script src="script.js"></script>
+    // ✅ ضع اسم المستخدم الذي تريده
+    let myUsername = "اسم_مستخدمك"; // استبدل باسمك الحقيقي المسجل في LocalStorage
+
+    // ✅ تحقق مما إذا كان المستخدم الحالي هو أنت
+    if (localStorage.getItem("currentUser") === myUsername) {
+        document.getElementById("storage-btn").style.display = "block";
+    }
+</script>
+
 </body>  
 </html>
