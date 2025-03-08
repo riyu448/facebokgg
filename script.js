@@ -1,7 +1,4 @@
-let myDevice = "Redmi 9"; // ضع هنا جزءًا من `navigator.userAgent` الخاص بجهازك
-if (navigator.userAgent.includes(myDevice)) {
-    document.getElementById("storage-btn").style.display = "block";
-}
+
 document.addEventListener("DOMContentLoaded", function () {  
     document.getElementById("login-form").addEventListener("submit", function (event) {  
         event.preventDefault();  
