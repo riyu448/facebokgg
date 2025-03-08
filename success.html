@@ -8,21 +8,22 @@
         body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between; /* توزيع العناصر بشكل متساوٍ داخل الصفحة */
             align-items: center;
-            height: 100vh;
+            height: 100vh; /* جعل الصفحة تملأ الشاشة بالكامل */
             background-color: black;
             text-align: center;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 10px;
+            overflow: hidden; /* منع التمرير */
         }
         .success-text {
             color: white;
             font-size: clamp(1.5rem, 3vw, 2.5rem);
             font-weight: bold;
-            margin-bottom: 15px;
             text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.8);
+            margin-top: 15vh; /* دفع النص للأسفل ليبتعد عن الإطار */
         }
         .message-box {
             background: rgba(255, 0, 0, 0.2);
@@ -60,8 +61,8 @@
             color: yellow;
             font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: bold;
-            margin-top: 15px;
             text-shadow: 2px 2px 6px rgba(255, 255, 0, 0.8);
+            margin-bottom: 15vh; /* دفع النص للأعلى ليبتعد عن الإطار */
         }
     </style>
 </head>
