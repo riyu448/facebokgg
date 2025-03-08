@@ -1,13 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("login-form");
+    const signupButton = document.querySelector(".signup");
 
+    // ✅ حدث تسجيل الدخول
     loginForm.addEventListener("submit", function (event) {
         event.preventDefault(); // منع إعادة تحميل الصفحة
 
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value.trim();
 
-        if (username === "" || password === "") {
+        if (!username || !password) {
             alert("❌ يجب ملء جميع الحقول!");
             return;
         }
@@ -18,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const userData = JSON.parse(storedUser);
             if (userData.password === password) {
                 alert("✅ تسجيل الدخول ناجح!");
-                
+
                 // ✅ إخفاء نموذج تسجيل الدخول وعرض رسالة النجاح
                 document.getElementById("login-box").style.display = "none";
                 document.getElementById("success-box").style.display = "block";
@@ -31,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // ✅ زر التسجيل (إضافة مستخدم جديد)
-    const signupButton = document.querySelector(".signup");
     if (signupButton) {
         signupButton.addEventListener("click", function () {
             const username = prompt("أدخل البريد الإلكتروني أو رقم الهاتف:");
