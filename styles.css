@@ -40,6 +40,16 @@ input {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
+    display: block;
+}
+
+/* ✅ تنسيق رسالة الخطأ */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+    text-align: right;
 }
 
 button {
@@ -78,6 +88,26 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* ✅ تنسيق قسم الموافقة على الشروط */
+.terms {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.terms input {
+    width: auto;
+    margin-right: 5px;
+}
+
+.terms label {
+    display: flex;
+    align-items: center;
+}
+
 /* ✅ تنسيق النافذة المنبثقة */
 .modal {
     display: none;
