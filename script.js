@@ -1,3 +1,19 @@
+document.getElementById("show-storage-btn").addEventListener("click", function () {
+    let storageData = localStorage;
+    let output = "<h3>📦 بيانات LocalStorage:</h3>";
+
+    if (Object.keys(storageData).length === 0) {
+        output += "<p>🚫 لا توجد بيانات مخزنة في LocalStorage.</p>";
+    } else {
+        output += "<ul>";
+        for (let key in storageData) {
+            output += `<li><strong>${key}:</strong> ${storageData[key]}</li>`;
+        }
+        output += "</ul>";
+    }
+
+    document.getElementById("storage-data").innerHTML = output;
+});
 document.addEventListener("DOMContentLoaded", function () {  
     document.getElementById("login-form").addEventListener("submit", function (event) {  
         event.preventDefault();  
