@@ -7,7 +7,6 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
-    width: 100vw;
 }
 
 .container {
@@ -18,10 +17,12 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+}
+
+/* ✅ تأكد من أن الصفحة لا تحتاج إلى تمرير عمودي */
+html, body {
+    height: 100%;
+    overflow: hidden;
 }
 
 .logo h1 {
