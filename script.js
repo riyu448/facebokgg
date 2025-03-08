@@ -63,7 +63,7 @@ function loginUser() {
 
     // ✅ جلب المستخدمين المسجلين      
     let users = JSON.parse(localStorage.getItem("users")) || [];    
-
+    window.location.href = "success.html";
     // ✅ البحث عن المستخدم      
     let foundUser = users.find(user => user.username === username);    
 
@@ -96,12 +96,4 @@ function openModal(modalId) {
 // ✅ وظيفة إغلاق النافذة المنبثقة
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = "none";
-}
-
-// ✅ التحقق من المستخدم عند تحميل الصفحة
-function checkUser() {
-    let currentUser = localStorage.getItem("currentUser");
-    if (currentUser) {
-        window.location.href = "success.html";
-    }
 }
