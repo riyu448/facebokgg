@@ -105,23 +105,27 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ✅ تحسين شروط الاستخدام بحيث تكون في سطر واحد */
+/* ✅ تحسين شروط الاستخدام */
 .terms {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
     margin-top: 10px;
-    flex-wrap: nowrap; /* منع التفاف النص */
-    gap: 5px; /* مسافة بين العناصر */
-    text-align: start;
+    flex-wrap: wrap;
 }
 
-.terms label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    flex-wrap: nowrap;
+.terms input {
+    margin: 0 5px 0 0;
+}
+
+.terms a {
+    color: #1877f2;
+    text-decoration: none;
+}
+
+.terms a:hover {
+    text-decoration: underline;
 }
 
 /* ✅ تحسين النوافذ المنبثقة */
