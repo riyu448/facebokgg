@@ -1,28 +1,27 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
+/* ✅ تصفير الصفحة للحصول على توزيع مثالي */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+    background-color: #f0f2f5;
+    font-family: Arial, sans-serif;
 }
 
 .container {
     text-align: center;
-    max-width: 400px;
     width: 90%;
+    max-width: 400px;
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* ✅ تأكد من أن الصفحة لا تحتاج إلى تمرير عمودي */
-html, body {
-    height: 100%;
-    overflow: hidden;
 }
 
 .logo h1 {
@@ -42,7 +41,7 @@ html, body {
 }
 
 input {
-    width: calc(100% - 20px);
+    width: 100%;
     padding: 12px;
     margin: 8px 0;
     border: 1px solid #ddd;
