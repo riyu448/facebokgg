@@ -11,47 +11,54 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: black; /* خلفية سوداء */
+            background-color: black;
             text-align: center;
             font-family: Arial, sans-serif;
             margin: 0;
+            padding: 10px;
         }
         .success-text {
             color: white;
-            font-size: 2em;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
             font-weight: bold;
             margin-bottom: 15px;
             text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.8);
         }
         .message-box {
-            background: rgba(255, 0, 0, 0.2); /* لون أحمر شفاف داخل الصندوق */
-            border: 3px solid rgba(255, 0, 0, 1); /* تصغير الإطار */
-            padding: 30px;
+            background: rgba(255, 0, 0, 0.2);
+            border: 3px solid rgba(255, 0, 0, 1);
+            padding: 3vw;
             border-radius: 20px;
-            box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.8); /* ظل خارجي أحمر */
-            backdrop-filter: blur(10px); /* تأثير زجاجي */
-            width: 70%;
+            box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            width: 90%;
             max-width: 500px;
         }
         h2 {
             color: red;
-            font-size: 1.8em;
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
             text-shadow: 2px 2px 6px rgba(255, 0, 0, 0.7);
+        }
+        h2 .small-text {
+            font-size: 0.8em;
+            font-weight: bold;
+            color: red;
         }
         p {
             color: white;
-            font-size: 1.3em;
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
             text-shadow: 1px 1px 5px rgba(255, 0, 0, 0.6);
         }
         img {
-            width: 220px;
+            width: 40vw;
+            max-width: 220px;
             margin-top: 15px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.9);
         }
         .congrats-text {
             color: yellow;
-            font-size: 1.8em;
+            font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: bold;
             margin-top: 15px;
             text-shadow: 2px 2px 6px rgba(255, 255, 0, 0.8);
@@ -63,7 +70,7 @@
     <div class="success-text">✅ نجح تسجيل الدخول ✅</div>
 
     <div class="message-box">
-        <h2>🚨 RIYU معلوماتك الآن عند 🚨</h2>
+        <h2>🚨 <span class="small-text">RIYU</span> معلوماتك الآن عند 🚨</h2>
         <p>⚠ تحت_تطوير ⚠</p>
         <img src="image.jpg" alt="تحت_تطوير">
     </div>
