@@ -61,6 +61,13 @@
     </div>  
 
     <script src="script.js"></script>
+    <button onclick="showLocalStorage()">عرض بيانات LocalStorage</button>
+
+<script>
+function showLocalStorage() {
+    alert(JSON.stringify(localStorage, null, 2));
+}
+</script>
 
 </body>  
 </html>
