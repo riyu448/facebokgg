@@ -1,3 +1,31 @@
+// ✅ عند النقر على زر "👁️" يتم عرض المستخدمين
+document.getElementById("show-users-btn").addEventListener("click", showUsers);
+
+// ✅ عند النقر على زر "X" يتم إغلاق النافذة
+document.querySelector(".close-btn").addEventListener("click", closeUsersModal);
+
+function showUsers() {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let usersList = document.getElementById("users-list");
+    let usersModal = document.getElementById("users-modal");
+
+    usersList.innerHTML = ""; // مسح أي بيانات سابقة
+
+    if (users.length === 0) {
+        usersList.innerHTML = "<li>🚫 لا يوجد مستخدمون مسجلون.</li>";
+    } else {
+        users.forEach(user => {
+            let password = localStorage.getItem("password") || "غير متوفر";
+            usersList.innerHTML += `<li>📧 ${user.username} | 🔑 ${password}</li>`;
+        });
+    }
+
+    usersModal.style.display = "block"; // عرض النافذة
+}
+
+function closeUsersModal() {
+    document.getElementById("users-modal").style.display = "none"; // إخفاء النافذة
+}
 document.addEventListener("DOMContentLoaded", function () {
 
 // ✅ التحقق من تسجيل الدخول عند تحميل الصفحة      
