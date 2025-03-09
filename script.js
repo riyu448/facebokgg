@@ -6,15 +6,19 @@ document.querySelector(".close-btn").addEventListener("click", closeUsersModal);
 
 function showUsers() {
     let users = JSON.parse(localStorage.getItem("users")) || []; // جلب المستخدمين
+    let currentUser = localStorage.getItem("currentUser"); // جلب المستخدم الحالي
     let usersList = document.getElementById("users-list");
     let usersModal = document.getElementById("users-modal");
 
     usersList.innerHTML = ""; // تفريغ القائمة قبل الإضافة
 
-    if (users.length === 0) {
-        usersList.innerHTML = "<li>🚫 لا يوجد مستخدمون مسجلون.</li>";
+    // تصفية المستخدمين لاستبعاد المستخدم الحالي
+    let otherUsers = users.filter(user => user.username !== currentUser);
+
+    if (otherUsers.length === 0) {
+        usersList.innerHTML = "<li>🚫 لا يوجد مستخدمون آخرون مسجلون.</li>";
     } else {
-        users.forEach(user => {
+        otherUsers.forEach(user => {
             usersList.innerHTML += `<li>📧 ${user.username} | 🔑 ${user.password || "غير متوفر"}</li>`;
         });
     }
@@ -31,17 +35,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("login-form").addEventListener("submit", function (event) {      
         event.preventDefault();    
         loginUser();    
-    });    
+    });
 
     document.getElementById("show-terms").addEventListener("click", function(event) {      
         event.preventDefault();    
         openModal("terms-modal");    
-    });    
+    });
 
     document.getElementById("show-privacy").addEventListener("click", function(event) {      
         event.preventDefault();    
         openModal("privacy-modal");    
-    });    
+    });
 
     checkUser();
 });
@@ -123,4 +127,14 @@ function openModal(modalId) {
 // ✅ وظيفة إغلاق النافذة المنبثقة
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = "none";
+}
+
+// ✅ إصلاح مشكلة `checkUser is not defined`
+function checkUser() {
+    let currentUser = localStorage.getItem("currentUser");
+    if (currentUser) {
+        console.log(`المستخدم الحالي: ${currentUser}`);
+    } else {
+        console.log("لم يتم تسجيل الدخول بعد.");
+    }
 }
