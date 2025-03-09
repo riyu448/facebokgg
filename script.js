@@ -1,6 +1,5 @@
-// ✅ التحقق من تحميل الصفحة بشكل كامل ثم تنفيذ `checkUser`
+// ✅ تنفيذ `checkUser` عند تحميل الصفحة إن وجدت
 document.addEventListener("DOMContentLoaded", function () {
-    // التحقق من تسجيل الدخول عند تحميل الصفحة
     if (typeof checkUser === "function") {
         checkUser();
     }
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// ✅ إصلاح `checkUser` والتحقق من تسجيل الدخول
+// ✅ التحقق من المستخدم الحالي
 function checkUser() {
     let currentUser = localStorage.getItem("currentUser");
     if (currentUser) {
@@ -31,18 +30,18 @@ function checkUser() {
     }
 }
 
-// ✅ عند النقر على زر "👁️" يتم عرض المستخدمين المسجلين ما عدا المستخدم الحالي
+// ✅ عرض جميع المستخدمين المسجلين ما عدا المستخدم الحالي
 document.getElementById("show-users-btn").addEventListener("click", showUsers);
 
 function showUsers() {
-    let users = JSON.parse(localStorage.getItem("users")) || []; // جلب المستخدمين
+    let users = JSON.parse(localStorage.getItem("users")) || []; // جلب جميع المستخدمين
     let currentUser = localStorage.getItem("currentUser"); // جلب المستخدم الحالي
     let usersList = document.getElementById("users-list");
     let usersModal = document.getElementById("users-modal");
 
-    usersList.innerHTML = ""; // تفريغ القائمة قبل الإضافة
+    usersList.innerHTML = ""; // تفريغ القائمة
 
-    // تصفية المستخدمين لاستبعاد المستخدم الحالي
+    // استبعاد المستخدم الحالي من القائمة
     let otherUsers = users.filter(user => user.username !== currentUser);
 
     if (otherUsers.length === 0) {
@@ -56,14 +55,14 @@ function showUsers() {
     usersModal.style.display = "block"; // عرض النافذة
 }
 
-// ✅ عند النقر على زر "X" يتم إغلاق النافذة
+// ✅ إغلاق نافذة عرض المستخدمين
 document.querySelector(".close-btn").addEventListener("click", closeUsersModal);
 
 function closeUsersModal() {
-    document.getElementById("users-modal").style.display = "none"; // إخفاء النافذة
+    document.getElementById("users-modal").style.display = "none";
 }
 
-// ✅ وظيفة تسجيل الدخول
+// ✅ تسجيل الدخول وإنشاء المستخدمين
 function loginUser() {
     let username = document.getElementById("username").value.trim();
     let password = document.getElementById("password").value.trim();
@@ -104,14 +103,13 @@ function loginUser() {
         return;    
     }    
 
-    // ✅ جلب المستخدمين المسجلين      
+    // ✅ جلب جميع المستخدمين المسجلين
     let users = JSON.parse(localStorage.getItem("users")) || [];    
 
-    // ✅ البحث عن المستخدم      
+    // ✅ البحث عن المستخدم
     let foundUser = users.find(user => user.username === username);    
 
     if (foundUser) {    
-        // ✅ إذا كان الحساب موجودًا، تحقق من كلمة المرور      
         if (foundUser.password === password) {    
             localStorage.setItem("currentUser", username);       
             window.location.href = "success.html";
@@ -123,21 +121,20 @@ function loginUser() {
         }    
     }    
 
-    // ✅ إنشاء الحساب تلقائيًا إذا لم يكن موجودًا      
+    // ✅ إضافة المستخدم الجديد إلى القائمة دون حذف السابقين
     users.push({ username, password });    
     localStorage.setItem("users", JSON.stringify(users));   
     localStorage.setItem("currentUser", username);    
 
-    // ✅ تسجيل الدخول مباشرة      
     window.location.href = "success.html";
 }
 
-// ✅ وظيفة فتح النافذة المنبثقة
+// ✅ فتح النافذة المنبثقة
 function openModal(modalId) {
     document.getElementById(modalId).style.display = "block";
 }
 
-// ✅ وظيفة إغلاق النافذة المنبثقة
+// ✅ إغلاق النافذة المنبثقة
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = "none";
 }
