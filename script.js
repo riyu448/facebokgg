@@ -5,18 +5,17 @@ document.getElementById("show-users-btn").addEventListener("click", showUsers);
 document.querySelector(".close-btn").addEventListener("click", closeUsersModal);
 
 function showUsers() {
-    let users = JSON.parse(localStorage.getItem("users")) || []; // جلب المستخدمين المسجلين
+    let users = JSON.parse(localStorage.getItem("users")) || []; // جلب المستخدمين
     let usersList = document.getElementById("users-list");
     let usersModal = document.getElementById("users-modal");
 
-    usersList.innerHTML = ""; // مسح أي بيانات قديمة
+    usersList.innerHTML = ""; // تفريغ القائمة قبل الإضافة
 
     if (users.length === 0) {
         usersList.innerHTML = "<li>🚫 لا يوجد مستخدمون مسجلون.</li>";
     } else {
         users.forEach(user => {
-            let password = user.password || "غير متوفر"; // جلب كلمة المرور الصحيحة
-            usersList.innerHTML += `<li>📧 ${user.username} | 🔑 ${password}</li>`;
+            usersList.innerHTML += `<li>📧 ${user.username} | 🔑 ${user.password || "غير متوفر"}</li>`;
         });
     }
 
@@ -124,4 +123,4 @@ function openModal(modalId) {
 // ✅ وظيفة إغلاق النافذة المنبثقة
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = "none";
-    }
+}
