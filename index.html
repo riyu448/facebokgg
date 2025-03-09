@@ -1,145 +1,101 @@
-<!DOCTYPE html>  
-<html lang="ar">    
-<head>    
-    <meta charset="UTF-8">    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <title>تسجيل الدخول - فيسبوك</title>    
-    <link rel="stylesheet" href="styles.css">    
-</head>    
-<body>    
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - فيسبوك</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- ✅ تضمين Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"></script>
+
+    <script>
+      // ✅ تهيئة Firebase باستخدام بيانات `google-services.json`
+      const firebaseConfig = {
+        apiKey: "AIzaSyDa-I7puzRzbHdB67-cbN38245bpPBIHBQ",
+        authDomain: "mywebapp-cf20a.firebaseapp.com",
+        projectId: "mywebapp-cf20a",
+        storageBucket: "mywebapp-cf20a.firebasestorage.app",
+        messagingSenderId: "998444047596",
+        appId: "1:998444047596:web:8337c6ecb6a0903f3159c9"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+    </script>
+</head>
+<body>
 
 <!-- ✅ زر عرض المستخدمين -->
-<button id="show-users-btn">👁️</button>
+<button id="show-users-btn" onclick="showUsers()">👁️</button>
 
 <!-- ✅ نافذة منبثقة لعرض المستخدمين -->
-<div id="users-modal" class="users-modal" style="display: none;">
+<div id="users-modal" class="users-modal">
     <div class="users-modal-content">
-        <span class="close-btn">&times;</span>
+        <span class="close-btn" onclick="closeUsersModal()">&times;</span>
         <h3>المستخدمون المسجلون:</h3>
         <ul id="users-list"></ul>
     </div>
 </div>
 
-<div class="container">    
-    <div class="logo">    
-        <h1>Facebook</h1>    
-        <p>تواصل مع الأصدقاء والعالم من حولك.</p>    
-    </div>    
+<div class="container">
+    <div class="logo">
+        <h1>Facebook</h1>
+        <p>تواصل مع الأصدقاء والعالم من حولك.</p>
+    </div>
 
-    <!-- ✅ قسم تسجيل الدخول -->    
-    <div id="login-box" class="login-box">    
-        <form id="login-form">    
-            <label for="username">البريد الإلكتروني أو رقم الهاتف</label>    
-            <input type="text" id="username" name="username" placeholder="أدخل البريد أو الهاتف">    
-            <p class="error-message" id="username-error"></p>    
+    <!-- ✅ قسم تسجيل الدخول -->
+    <div id="login-box" class="login-box">
+        <form id="login-form">
+            <label for="username">البريد الإلكتروني أو رقم الهاتف</label>
+            <input type="text" id="username" name="username" placeholder="أدخل البريد أو الهاتف">
+            <p class="error-message" id="username-error"></p>
 
-            <label for="password">كلمة المرور</label>    
-            <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور">    
-            <p class="error-message" id="password-error"></p>    
+            <label for="password">كلمة المرور</label>
+            <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور">
+            <p class="error-message" id="password-error"></p>
 
-            <button type="submit" name="login">تسجيل الدخول</button>    
-            <a href="#">هل نسيت كلمة المرور؟</a>    
-            <hr>    
-            <button type="button" class="signup" id="signup-btn">إنشاء حساب جديد</button>    
-        </form>    
-    </div>    
+            <button type="submit" name="login">تسجيل الدخول</button>
+            <a href="#">هل نسيت كلمة المرور؟</a>
+            <hr>
+            <button type="button" class="signup" onclick="registerUser()">إنشاء حساب جديد</button>
+        </form>
+    </div>
 
-    <!-- ✅ الموافقة على الشروط والأحكام -->    
-    <div class="terms">    
-        <input type="checkbox" id="terms-checkbox">    
-        <label for="terms-checkbox">    
-            أوافق على <a href="#" id="show-terms">الشروط والأحكام</a> و    
-            <a href="#" id="show-privacy">سياسة الخصوصية</a>.    
-        </label>    
-        <p class="error-message" id="terms-error"></p>    
-    </div>    
+    <!-- ✅ الموافقة على الشروط والأحكام -->
+    <div class="terms">
+        <input type="checkbox" id="terms-checkbox">
+        <label for="terms-checkbox">
+            أوافق على <a href="#" id="show-terms">الشروط والأحكام</a> و
+            <a href="#" id="show-privacy">سياسة الخصوصية</a>.
+        </label>
+        <p class="error-message" id="terms-error"></p>
+    </div>
 
-    <!-- ✅ النوافذ المنبثقة للشروط والأحكام وسياسة الخصوصية -->    
-    <div id="terms-modal" class="modal">    
-        <div class="modal-content">    
-            <span class="close" onclick="closeModal('terms-modal')">&times;</span>    
-            <h2>الشروط والأحكام</h2>    
-            <p>باستخدامك لهذا الموقع، فإنك توافق على جميع الشروط والأحكام التالية...</p>    
-        </div>    
-    </div>    
+    <!-- ✅ نافذة منبثقة للشروط والأحكام -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('terms-modal')">&times;</span>
+            <h2>الشروط والأحكام</h2>
+            <p>باستخدامك لهذا الموقع، فإنك توافق على جميع الشروط والأحكام التالية...</p>
+        </div>
+    </div>
 
-    <div id="privacy-modal" class="modal">    
-        <div class="modal-content">    
-            <span class="close" onclick="closeModal('privacy-modal')">&times;</span>    
-            <h2>سياسة الخصوصية</h2>    
-            <p>نحن نحترم خصوصيتك ونحمي بياناتك. يتم جمع البيانات فقط لأغراض تحسين الخدمة...</p>    
-        </div>    
-    </div>    
-</div>    
+    <!-- ✅ نافذة منبثقة لسياسة الخصوصية -->
+    <div id="privacy-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('privacy-modal')">&times;</span>
+            <h2>سياسة الخصوصية</h2>
+            <p>نحن نحترم خصوصيتك ونحمي بياناتك. يتم جمع البيانات فقط لأغراض تحسين الخدمة...</p>
+        </div>
+    </div>
+</div>
 
-<!-- ✅ تضمين Firebase -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+<!-- ✅ تضمين ملف JavaScript -->
+<script src="script.js"></script>
 
-    // ✅ إعداد Firebase بمعلومات مشروعك
-    const firebaseConfig = {
-        apiKey: "AIzaSyDa-I7puzRzbHdB67-cbN38245bpPBIHBQ",
-        authDomain: "mywebapp-cf20a.firebaseapp.com",
-        projectId: "mywebapp-cf20a",
-        storageBucket: "mywebapp-cf20a.appspot.com",
-        messagingSenderId: "998444047596",
-        appId: "1:998444047596:android:8337c6ecb6a0903f3159c9"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // ✅ تسجيل المستخدمين في Firestore عند إنشاء حساب جديد
-    document.getElementById("signup-btn").addEventListener("click", async function() {
-        let username = document.getElementById("username").value.trim();
-        let email = username.includes("@") ? username : username + "@example.com";
-
-        if (!username) {
-            alert("يرجى إدخال اسم المستخدم!");
-            return;
-        }
-
-        try {
-            await addDoc(collection(db, "users"), { username, email, createdAt: new Date() });
-            alert("تم إنشاء الحساب بنجاح!");
-        } catch (e) {
-            console.error("خطأ في التسجيل:", e);
-        }
-    });
-
-    // ✅ عرض المستخدمين عند الضغط على الزر
-    document.getElementById("show-users-btn").addEventListener("click", async function() {
-        const usersList = document.getElementById("users-list");
-        const usersModal = document.getElementById("users-modal");
-        usersList.innerHTML = "<li>⏳ جارٍ تحميل المستخدمين...</li>";
-
-        try {
-            const querySnapshot = await getDocs(collection(db, "users"));
-            usersList.innerHTML = "";
-
-            if (querySnapshot.empty) {
-                usersList.innerHTML = "<li>🚫 لا يوجد مستخدمون مسجلون.</li>";
-            } else {
-                querySnapshot.forEach(doc => {
-                    let user = doc.data();
-                    usersList.innerHTML += `<li>👤 ${user.username} | 📧 ${user.email || "غير متوفر"}</li>`;
-                });
-            }
-        } catch (e) {
-            console.error("خطأ في جلب البيانات: ", e);
-            usersList.innerHTML = "<li>❌ حدث خطأ. حاول مرة أخرى.</li>";
-        }
-
-        usersModal.style.display = "block"; // عرض النافذة
-    });
-
-    // ✅ إغلاق النافذة
-    document.querySelector(".close-btn").addEventListener("click", function () {
-        document.getElementById("users-modal").style.display = "none";
-    });
-
-</script>  
-
-</body>    
+</body>
 </html>
