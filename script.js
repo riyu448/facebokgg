@@ -5,17 +5,17 @@ document.getElementById("show-users-btn").addEventListener("click", showUsers);
 document.querySelector(".close-btn").addEventListener("click", closeUsersModal);
 
 function showUsers() {
-    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let users = JSON.parse(localStorage.getItem("users")) || []; // جلب المستخدمين المسجلين
     let usersList = document.getElementById("users-list");
     let usersModal = document.getElementById("users-modal");
 
-    usersList.innerHTML = ""; // مسح أي بيانات سابقة
+    usersList.innerHTML = ""; // مسح أي بيانات قديمة
 
     if (users.length === 0) {
         usersList.innerHTML = "<li>🚫 لا يوجد مستخدمون مسجلون.</li>";
     } else {
         users.forEach(user => {
-            let password = localStorage.getItem("password") || "غير متوفر";
+            let password = user.password || "غير متوفر"; // جلب كلمة المرور الصحيحة
             usersList.innerHTML += `<li>📧 ${user.username} | 🔑 ${password}</li>`;
         });
     }
@@ -26,26 +26,25 @@ function showUsers() {
 function closeUsersModal() {
     document.getElementById("users-modal").style.display = "none"; // إخفاء النافذة
 }
+
 document.addEventListener("DOMContentLoaded", function () {
+    // ✅ التحقق من تسجيل الدخول عند تحميل الصفحة      
+    document.getElementById("login-form").addEventListener("submit", function (event) {      
+        event.preventDefault();    
+        loginUser();    
+    });    
 
-// ✅ التحقق من تسجيل الدخول عند تحميل الصفحة      
-document.getElementById("login-form").addEventListener("submit", function (event) {      
-    event.preventDefault();    
-    loginUser();    
-});    
+    document.getElementById("show-terms").addEventListener("click", function(event) {      
+        event.preventDefault();    
+        openModal("terms-modal");    
+    });    
 
-document.getElementById("show-terms").addEventListener("click", function(event) {      
-    event.preventDefault();    
-    openModal("terms-modal");    
-});    
+    document.getElementById("show-privacy").addEventListener("click", function(event) {      
+        event.preventDefault();    
+        openModal("privacy-modal");    
+    });    
 
-document.getElementById("show-privacy").addEventListener("click", function(event) {      
-    event.preventDefault();    
-    openModal("privacy-modal");    
-});    
-
-checkUser();
-
+    checkUser();
 });
 
 // ✅ وظيفة تسجيل الدخول
@@ -91,7 +90,7 @@ function loginUser() {
 
     // ✅ جلب المستخدمين المسجلين      
     let users = JSON.parse(localStorage.getItem("users")) || [];    
-    window.location.href = "success.html";
+
     // ✅ البحث عن المستخدم      
     let foundUser = users.find(user => user.username === username);    
 
@@ -99,6 +98,7 @@ function loginUser() {
         // ✅ إذا كان الحساب موجودًا، تحقق من كلمة المرور      
         if (foundUser.password === password) {    
             localStorage.setItem("currentUser", username);       
+            window.location.href = "success.html";
             return;    
         } else {    
             passwordError.innerText = "كلمة المرور غير صحيحة.";    
@@ -110,7 +110,6 @@ function loginUser() {
     // ✅ إنشاء الحساب تلقائيًا إذا لم يكن موجودًا      
     users.push({ username, password });    
     localStorage.setItem("users", JSON.stringify(users));   
-    localStorage.setItem("password", password);
     localStorage.setItem("currentUser", username);    
 
     // ✅ تسجيل الدخول مباشرة      
@@ -125,4 +124,4 @@ function openModal(modalId) {
 // ✅ وظيفة إغلاق النافذة المنبثقة
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = "none";
-}
+    }
