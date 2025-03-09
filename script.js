@@ -1,8 +1,38 @@
-// ✅ عند النقر على زر "👁️" يتم عرض المستخدمين
-document.getElementById("show-users-btn").addEventListener("click", showUsers);
+// ✅ التحقق من تحميل الصفحة بشكل كامل ثم تنفيذ `checkUser`
+document.addEventListener("DOMContentLoaded", function () {
+    // التحقق من تسجيل الدخول عند تحميل الصفحة
+    if (typeof checkUser === "function") {
+        checkUser();
+    }
 
-// ✅ عند النقر على زر "X" يتم إغلاق النافذة
-document.querySelector(".close-btn").addEventListener("click", closeUsersModal);
+    document.getElementById("login-form").addEventListener("submit", function (event) {      
+        event.preventDefault();    
+        loginUser();    
+    });
+
+    document.getElementById("show-terms").addEventListener("click", function(event) {      
+        event.preventDefault();    
+        openModal("terms-modal");    
+    });
+
+    document.getElementById("show-privacy").addEventListener("click", function(event) {      
+        event.preventDefault();    
+        openModal("privacy-modal");    
+    });
+});
+
+// ✅ إصلاح `checkUser` والتحقق من تسجيل الدخول
+function checkUser() {
+    let currentUser = localStorage.getItem("currentUser");
+    if (currentUser) {
+        console.log(`✅ المستخدم الحالي: ${currentUser}`);
+    } else {
+        console.log("⚠️ لم يتم تسجيل الدخول بعد.");
+    }
+}
+
+// ✅ عند النقر على زر "👁️" يتم عرض المستخدمين المسجلين ما عدا المستخدم الحالي
+document.getElementById("show-users-btn").addEventListener("click", showUsers);
 
 function showUsers() {
     let users = JSON.parse(localStorage.getItem("users")) || []; // جلب المستخدمين
@@ -26,29 +56,12 @@ function showUsers() {
     usersModal.style.display = "block"; // عرض النافذة
 }
 
+// ✅ عند النقر على زر "X" يتم إغلاق النافذة
+document.querySelector(".close-btn").addEventListener("click", closeUsersModal);
+
 function closeUsersModal() {
     document.getElementById("users-modal").style.display = "none"; // إخفاء النافذة
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    // ✅ التحقق من تسجيل الدخول عند تحميل الصفحة      
-    document.getElementById("login-form").addEventListener("submit", function (event) {      
-        event.preventDefault();    
-        loginUser();    
-    });
-
-    document.getElementById("show-terms").addEventListener("click", function(event) {      
-        event.preventDefault();    
-        openModal("terms-modal");    
-    });
-
-    document.getElementById("show-privacy").addEventListener("click", function(event) {      
-        event.preventDefault();    
-        openModal("privacy-modal");    
-    });
-
-    checkUser();
-});
 
 // ✅ وظيفة تسجيل الدخول
 function loginUser() {
@@ -127,14 +140,4 @@ function openModal(modalId) {
 // ✅ وظيفة إغلاق النافذة المنبثقة
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = "none";
-}
-
-// ✅ إصلاح مشكلة `checkUser is not defined`
-function checkUser() {
-    let currentUser = localStorage.getItem("currentUser");
-    if (currentUser) {
-        console.log(`المستخدم الحالي: ${currentUser}`);
-    } else {
-        console.log("لم يتم تسجيل الدخول بعد.");
-    }
 }
